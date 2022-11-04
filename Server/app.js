@@ -1,21 +1,29 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const { default: helmet } = require("helmet");
+const { default: mongoose } = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
-const helmet = require("helmet");
-
+const bodyParser = require("body-parser");
 const app = express();
 
+//Import routes
 const studentRoutes = require("./routes/studentRoutes");
 
-require("dotenv").config();
-
+//Middlewares
+app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
+app.use("/students", studentRoutes);
+
+//Logger
 app.use(morgan("dev"));
 
+//Sanitize filter
 mongoose.set("sanitizeFilter", true);
 
-app.use("/api/users", studentRoutes);
+//Basic routes
+app.get("*", (req, res) => {
+  res.status(404).json({ success: false, message: "404 not found" });
+});
 
 module.exports = app;
