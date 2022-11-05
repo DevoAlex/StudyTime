@@ -8,12 +8,14 @@ const app = express();
 
 //Import routes
 const studentRoutes = require("./routes/studentRoutes");
+const teacherRoutes = require("./routes/teacherRoutes");
 
 //Middlewares
 app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
 app.use("/students", studentRoutes);
+app.use("/teachers", teacherRoutes);
 
 //Logger
 app.use(morgan("dev"));
@@ -22,6 +24,10 @@ app.use(morgan("dev"));
 mongoose.set("sanitizeFilter", true);
 
 //Basic routes
+app.get("/", (req, res) => {
+  res.status(200).send("Homepage");
+});
+
 app.get("*", (req, res) => {
   res.status(404).json({ success: false, message: "404 not found" });
 });

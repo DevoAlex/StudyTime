@@ -26,6 +26,7 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please include an email"],
       unique: true,
+      lowercase: true,
       validate(value) {
         if (!validator.isEmail(value)) {
           throw new Error("Please insert a valid email");
