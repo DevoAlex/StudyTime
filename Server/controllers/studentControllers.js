@@ -22,4 +22,16 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+const getSingleStudent = async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.studentID);
+    if (!student) {
+      return res.status(404).json("Error 404. User not found");
+    }
+    res.status(200).json({ success: true, data: student });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err });
+  }
+};
+
+module.exports = { signup, login, getSingleStudent };

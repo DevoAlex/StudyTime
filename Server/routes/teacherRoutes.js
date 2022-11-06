@@ -1,16 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const { signup, login } = require("../controllers/teacherControllers");
+const {
+  signup,
+  login,
+  getSingleTeacher,
+} = require("../controllers/teacherControllers");
 const Teacher = require("../models/teacherModel");
 const multer = require("multer");
 
 // * Multer setup
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/images/uploads");
+    cb(null, "../uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
+    console.log(file);
+    cb(null, file.originalname);
   },
 });
 
@@ -33,10 +38,16 @@ const upload = multer({
 // * routes
 router.post("/signup", upload.single("profileImage"), signup);
 
+router.get("/signup", (req, res) => {
+  res.status(200).send("Signup here");
+});
+
 router.post("/login", login);
 
 router.get("/login", (req, res) => {
   res.status(200).send("Login here");
 });
+
+router.get("/api/:teacherID", getSingleTeacher);
 
 module.exports = router;

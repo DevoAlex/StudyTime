@@ -99,7 +99,7 @@ const teacherSchema = new mongoose.Schema(
     },
     profileImage: {
       type: String,
-      default: "",
+      default: "default-propic.jpeg",
     },
   },
   {
