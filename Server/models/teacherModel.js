@@ -45,7 +45,7 @@ const teacherSchema = new mongoose.Schema(
       },
     },
     subjects: {
-      type: Array,
+      type: String,
       required: true,
       validate(value) {
         if (!validator.isAlpha(value)) {
@@ -54,27 +54,11 @@ const teacherSchema = new mongoose.Schema(
       },
     },
     daysOfAvailability: {
-      type: Array,
-      default: [""],
-      validate(value) {
-        if (
-          !validator.isIn(value, [
-            "",
-            "monday",
-            "tuesday",
-            "wednesday",
-            "thursday",
-            "friday",
-            "saturday",
-            "sunday",
-          ])
-        ) {
-          throw new Error("Must contain only valid days name");
-        }
-      },
+      type: String,
+      default: "",
     },
     pricePerHour: {
-      type: Number,
+      type: String,
       default: 0,
       validate(value) {
         if (!validator.isNumeric(value)) {
@@ -87,7 +71,7 @@ const teacherSchema = new mongoose.Schema(
       default: "",
     },
     availableForHomeworksHelp: {
-      type: Boolean,
+      type: String,
       required: true,
       validate(value) {
         if (!validator.isBoolean(value)) {
@@ -96,7 +80,7 @@ const teacherSchema = new mongoose.Schema(
       },
     },
     availableForExamPreparation: {
-      type: Boolean,
+      type: String,
       required: true,
       validate(value) {
         if (!validator.isBoolean(value)) {
@@ -105,7 +89,7 @@ const teacherSchema = new mongoose.Schema(
       },
     },
     availableForStudyHelp: {
-      type: Boolean,
+      type: String,
       required: true,
       validate(value) {
         if (!validator.isBoolean(value)) {
@@ -113,7 +97,7 @@ const teacherSchema = new mongoose.Schema(
         }
       },
     },
-    photo: {
+    profileImage: {
       type: String,
       default: "",
     },
