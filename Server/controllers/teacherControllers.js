@@ -13,7 +13,7 @@ const signup = async (req, res, next) => {
     availableForHomeworksHelp: req.body.availableForHomeworksHelp,
     availableForExamPreparation: req.body.availableForExamPreparation,
     availableForStudyHelp: req.body.availableForStudyHelp,
-    profileImage: req.file.originalname,
+    profileImage: req.file.path,
   });
   try {
     await teacher.save();

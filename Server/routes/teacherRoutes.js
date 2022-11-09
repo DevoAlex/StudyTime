@@ -11,6 +11,7 @@ const multer = require("multer");
 // * Multer setup
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log(file.path)
     cb(null, "../uploads");
   },
   filename: function (req, file, cb) {
@@ -49,5 +50,9 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/api/:teacherID", getSingleTeacher);
+
+// router.get('/uploads/:imageName', (req,res) => {
+
+// })
 
 module.exports = router;
