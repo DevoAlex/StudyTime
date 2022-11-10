@@ -70,6 +70,24 @@ const teacherSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    gender: {
+      type: String,
+      default: "not defined",
+      validate(value) {
+        if (!validator.isIn(value, ["male", "female", "not set"])) {
+          throw new Error("Gender must be 'male', 'female' or 'not set'");
+        }
+      },
+    },
+    city: {
+      type: String,
+      required: true,
+      validate(value) {
+        if (!validator.isAlpha(value)) {
+          throw new Error("City field must contain only letters");
+        }
+      },
+    },
     availableForHomeworksHelp: {
       type: String,
       required: true,
@@ -96,10 +114,6 @@ const teacherSchema = new mongoose.Schema(
           throw new Error("Availability must have value true or false");
         }
       },
-    },
-    profileImage: {
-      type: String,
-      default: "default-propic.jpeg",
     },
   },
   {

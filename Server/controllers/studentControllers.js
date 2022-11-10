@@ -16,9 +16,23 @@ const login = async (req, res) => {
       req.body.email,
       req.body.password
     );
-    res.status(200).send(student);
+    const key = process.env.PRIVATE_KEY;
+
+    const token = jwt.sign(
+      {
+        studentId: student._id,
+        studentEmail: student.email,
+      },
+      key,
+      { expiresIn: "24h" }
+    );
+    res.status(200).send({
+      message: "Login successful",
+      email: student.email,
+      token,
+    });
   } catch (err) {
-    res.status(400).send(err.message);
+    res.status(400).send({ error: err.message });
   }
 };
 

@@ -1,4 +1,5 @@
 const Teacher = require("../models/teacherModel");
+const jwt = require("jsonwebtoken");
 
 const signup = async (req, res, next) => {
   const teacher = new Teacher({
@@ -13,7 +14,7 @@ const signup = async (req, res, next) => {
     availableForHomeworksHelp: req.body.availableForHomeworksHelp,
     availableForExamPreparation: req.body.availableForExamPreparation,
     availableForStudyHelp: req.body.availableForStudyHelp,
-    profileImage: req.file.path,
+    gender: req.body.gender,
   });
   try {
     await teacher.save();
@@ -29,9 +30,24 @@ const login = async (req, res) => {
       req.body.email,
       req.body.password
     );
-    res.status(200).send(teacher);
+
+    const key = process.env.PRIVATE_KEY;
+
+    const token = jwt.sign(
+      {
+        teacherId: teacher._id,
+        teacherEmail: teacher.email,
+      },
+      key,
+      { expiresIn: "24h" }
+    );
+    res.status(200).send({
+      message: "Login successful",
+      email: teacher.email,
+      token,
+    });
   } catch (err) {
-    res.status(400).send(err.message);
+    res.status(400).send({ error: err.message });
   }
 };
 

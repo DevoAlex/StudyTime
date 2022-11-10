@@ -16,7 +16,6 @@ app.use(cors());
 app.use(helmet());
 app.use("/students", studentRoutes);
 app.use("/teachers", teacherRoutes);
-app.use('/uploads', express.static("uploads"));
 
 //Logger
 app.use(morgan("dev"));
