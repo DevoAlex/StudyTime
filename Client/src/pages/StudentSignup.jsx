@@ -28,7 +28,7 @@ function StudentSignup() {
     e.preventDefault();
     try {
       console.log(signupData);
-      await fetch('https://study-time-api.herokuapp.com/students/signup', {
+      const receivedData = await axios('https://study-time-api.herokuapp.com/students/signup', {
         method: 'POST',
         body: {
             firstName: signupData.firstName,
@@ -37,11 +37,11 @@ function StudentSignup() {
             password: signupData.password
         },
         headers: {
-            'Content-type' : 'application/json; charset=UTF-8'
+            'Content-type' : 'application/json; charset=UTF-8',
+            'Access-Control-Allow-Credentials': 'true'
         },
       })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
+      console.log(receivedData.body)
     } catch (err) {
       console.log(err);
     }
