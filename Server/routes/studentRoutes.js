@@ -9,7 +9,7 @@ const Student = require("../models/studentModel");
 
 router.post("/signup", signup);
 
-router.get("/singup", (req, res) => {
+router.get("/signup", (req, res) => {
   res.status(200).send("Signup here");
 });
 

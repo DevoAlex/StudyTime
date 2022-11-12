@@ -1,13 +1,12 @@
 import "./App.css";
-
 import React from "react";
-import TeacherPage from "./components/TeacherPage";
+import Pages from './pages/Pages'
 
 function App() {
   return (
-    <div>
-      <TeacherPage />
-    </div>
+    <>
+      <Pages />
+    </>
   );
 }
 
