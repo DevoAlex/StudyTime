@@ -10,18 +10,38 @@ function StudentSignup() {
     password: "",
   });
 
-  const configuration = {
-    method: "POST",
-    url: 'https://study-time-api.herokuapp.com/students/signup',
-    data: {signupData}
-  };
+//   const configuration = {
+//     method: "POST",
+//     url: 'https://study-time-api.herokuapp.com/students/signup',
+//     headers: {
+//         'Content-type' : 'application/json; charset=UTF-8'
+//     },
+//     body: JSON.stringify({
+//         firstName: signupData.firstName,
+//         lastName: signupData.lastName,
+//         email: signupData.email,
+//         password: signupData.password
+//     })
+//   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log(signupData);
-      await axios(configuration)
-      .then((res)=> {console.log(res)})
+      await fetch('https://study-time-api.herokuapp.com/students/signup', {
+        method: 'POST',
+        body: JSON.stringify({
+            firstName: signupData.firstName,
+            lastName: signupData.lastName,
+            email: signupData.email,
+            password: signupData.password
+        }),
+        headers: {
+            'Content-type' : 'application/json; charset=UTF-8'
+        },
+      })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
     } catch (err) {
       console.log(err);
     }
