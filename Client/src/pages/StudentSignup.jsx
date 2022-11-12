@@ -24,21 +24,24 @@ function StudentSignup() {
 //     })
 //   };
 
+  let payload = {
+    'firstName': signupData.firstName,
+            'lastName': signupData.lastName,
+            'email': signupData.email,
+            'password': signupData.password
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log(signupData);
       const receivedData = await axios('https://study-time-api.herokuapp.com/students/signup', {
         method: 'POST',
-        body: {
-            firstName: signupData.firstName,
-            lastName: signupData.lastName,
-            email: signupData.email,
-            password: signupData.password
-        },
+        data: payload,
+        
         headers: {
+            'accept' : 'application/json', 
             'Content-type' : 'application/json; charset=UTF-8',
-            'Access-Control-Allow-Credentials': 'true'
         },
       })
       console.log(receivedData.body)
