@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const cors = require('cors')
 const {
   signup,
   login,
@@ -7,6 +8,7 @@ const {
 } = require("../controllers/studentControllers");
 const Student = require("../models/studentModel");
 
+router.options('/signup', cors())
 router.post("/signup", signup);
 
 router.get("/signup", (req, res) => {
