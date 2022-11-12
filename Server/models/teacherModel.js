@@ -79,15 +79,15 @@ const teacherSchema = new mongoose.Schema(
         }
       },
     },
-    city: {
-      type: String,
-      required: true,
-      validate(value) {
-        if (!validator.isAlpha(value)) {
-          throw new Error("City field must contain only letters");
-        }
-      },
-    },
+    // city: {
+    //   type: String,
+    //   required: true,
+    //   validate(value) {
+    //     if (!validator.isAlpha(value)) {
+    //       throw new Error("City field must contain only letters");
+    //     }
+    //   },
+    // },
     availableForHomeworksHelp: {
       type: String,
       required: true,
