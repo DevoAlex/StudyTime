@@ -6,7 +6,7 @@ const studentSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "Please include a first name"],
+      //required: [true, "Please include a first name"],
       validate(value) {
         if (!validator.isAlpha(value)) {
           throw new Error("Name must contain only letters");
@@ -15,7 +15,7 @@ const studentSchema = new mongoose.Schema(
     },
     lastName: {
       type: String,
-      required: [true, "Please include a last name"],
+      //required: [true, "Please include a last name"],
       validate(value) {
         if (!validator.isAlpha(value)) {
           throw new Error("Name must contain only letters");
@@ -24,7 +24,7 @@ const studentSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "Please include an email"],
+      //required: [true, "Please include an email"],
       unique: true,
       lowercase: true,
       validate(value) {
@@ -35,7 +35,6 @@ const studentSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
       validate(value) {
         if (!validator.isStrongPassword(value)) {
           throw new Error(
