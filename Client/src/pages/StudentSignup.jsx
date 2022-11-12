@@ -30,12 +30,12 @@ function StudentSignup() {
       console.log(signupData);
       await fetch('https://study-time-api.herokuapp.com/students/signup', {
         method: 'POST',
-        body: JSON.stringify({
+        body: {
             firstName: signupData.firstName,
             lastName: signupData.lastName,
             email: signupData.email,
             password: signupData.password
-        }),
+        },
         headers: {
             'Content-type' : 'application/json; charset=UTF-8'
         },
