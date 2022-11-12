@@ -4,7 +4,7 @@ const signup = async (req, res) => {
   const student = new Student(req.body);
   try {
     await student.save();
-    res.status(201).send({ success: true, data: student });
+    res.status(201).json({ success: true, data: student });
   } catch (err) {
     res.status(400).send(err);
   }
