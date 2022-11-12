@@ -81,7 +81,7 @@ const teacherSchema = new mongoose.Schema(
     },
     city: {
       type: String,
-      default: '',
+      required: true,
       validate(value) {
         if (!validator.isAlpha(value)) {
           throw new Error("City field must contain only letters");
