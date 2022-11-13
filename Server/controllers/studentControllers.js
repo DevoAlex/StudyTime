@@ -1,4 +1,5 @@
 const Student = require("../models/studentModel");
+const jwt = require("jsonwebtoken");
 
 const signup = async (req, res) => {
   const student = new Student(req.body);

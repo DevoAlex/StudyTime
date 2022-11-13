@@ -3,4 +3,7 @@ const database = require("./database");
 
 database.connect();
 
-app.listen(process.env.PORT, () => console.log(`Server is listening`));
+let port = process.env.PORT || 80
+
+app.listen(port, () => console.log(`Server is listening on port ${port}`));
+//app.listen(4000, () => console.log(`Server is listening`));
