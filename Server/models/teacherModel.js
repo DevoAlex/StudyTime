@@ -6,7 +6,6 @@ const teacherSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "Please include a first name"],
       validate(value) {
         if (!validator.isAlpha(value)) {
           throw new Error("Name must contain only letters");
@@ -15,7 +14,6 @@ const teacherSchema = new mongoose.Schema(
     },
     lastName: {
       type: String,
-      required: [true, "Please include a last name"],
       validate(value) {
         if (!validator.isAlpha(value)) {
           throw new Error("Name must contain only letters");
@@ -24,7 +22,6 @@ const teacherSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "Please include an email"],
       unique: true,
       lowercase: true,
       validate(value) {
@@ -35,7 +32,6 @@ const teacherSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
       validate(value) {
         if (!validator.isStrongPassword(value)) {
           throw new Error(
@@ -46,7 +42,6 @@ const teacherSchema = new mongoose.Schema(
     },
     subjects: {
       type: String,
-      required: true,
       validate(value) {
         if (!validator.isAlpha(value)) {
           throw new Error("Subjects must contain only letters");
@@ -59,7 +54,7 @@ const teacherSchema = new mongoose.Schema(
     },
     pricePerHour: {
       type: String,
-      default: 0,
+      default: '0',
       validate(value) {
         if (!validator.isNumeric(value)) {
           throw new Error("Price must contain only numbers");
@@ -79,18 +74,16 @@ const teacherSchema = new mongoose.Schema(
         }
       },
     },
-    // city: {
-    //   type: String,
-    //   required: true,
-    //   validate(value) {
-    //     if (!validator.isAlpha(value)) {
-    //       throw new Error("City field must contain only letters");
-    //     }
-    //   },
-    // },
+    city: {
+      type: String,
+      validate(value) {
+        if (!validator.isAlpha(value)) {
+          throw new Error("City field must contain only letters");
+        }
+      },
+    },
     availableForHomeworksHelp: {
       type: String,
-      required: true,
       validate(value) {
         if (!validator.isBoolean(value)) {
           throw new Error("Availability must have value true or false");
@@ -99,7 +92,6 @@ const teacherSchema = new mongoose.Schema(
     },
     availableForExamPreparation: {
       type: String,
-      required: true,
       validate(value) {
         if (!validator.isBoolean(value)) {
           throw new Error("Availability must have value true or false");
@@ -108,7 +100,6 @@ const teacherSchema = new mongoose.Schema(
     },
     availableForStudyHelp: {
       type: String,
-      required: true,
       validate(value) {
         if (!validator.isBoolean(value)) {
           throw new Error("Availability must have value true or false");

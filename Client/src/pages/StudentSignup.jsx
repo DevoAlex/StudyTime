@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import axios from "axios";
 import styled from "styled-components";
+import Nav from "../components/Nav";
 
 function StudentSignup() {
   const [signupData, setSignupData] = useState({
@@ -9,125 +11,168 @@ function StudentSignup() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
-//   const configuration = {
-//     method: "POST",
-//     url: 'https://study-time-api.herokuapp.com/students/signup',
-//     headers: {
-//         'Content-type' : 'application/json; charset=UTF-8'
-//     },
-//     body: JSON.stringify({
-//         firstName: signupData.firstName,
-//         lastName: signupData.lastName,
-//         email: signupData.email,
-//         password: signupData.password
-//     })
-//   };
-
-  // const configuration = {
-  //   method: 'post',
-  //   url: 'https://study-time-api.herokuapp.com/students/signup',
-  //   data: {
-  //     signupData
-  //   }
-  // }
+  const configuration = {
+    method: "post",
+    url: "https://study-time-api.herokuapp.com/students/signup",
+    data: {
+      firstName: signupData.firstName,
+      lastName: signupData.lastName,
+      email: signupData.email,
+      password: signupData.password,
+    },
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://study-time-api.herokuapp.com/students/signup', {
-        firstName: signupData.firstName,
-        lastName: signupData.lastName,
-        email: signupData.email,
-        password: signupData.password
-      })
-      .then((res) => console.log(res))
+      await axios(configuration).then((res) => console.log(res));
+      setSignupData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+      });
     } catch (err) {
-      if (err.response) {
-        console.log(err.response)
-      }
-    if(err.request){
-
-      console.log(err.request)
-      
-      }
-      if(err.message){
-      
-      console.log(err.message)
-      
+      console.log(err.response.data);
+      if (err.response.data.name === "ValidationError") {
+        setError(err.response.data.message.split(": ").slice(2));
+        console.log(error);
       }
     }
   };
 
   return (
     <main>
-      <SForm onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First name : </label>
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={signupData.firstName}
-          onChange={(e) => {
-            setSignupData({
-              ...signupData,
-              firstName: e.target.value,
-            });
-          }}
+      <Helmet>
+        <title>Student Signup - Study Time</title>
+        <meta
+          name="description"
+          content="Register to Study Time to find someone who helps you to prepare your next exam or do your homeworks. "
         />
-        <label htmlFor="lastName">Last name : </label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={signupData.lastName}
-          onChange={(e) => {
-            setSignupData({
-              ...signupData,
-              lastName: e.target.value,
-            });
-          }}
-        />
-        <label htmlFor="email">Email : </label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          value={signupData.email}
-          onChange={(e) => {
-            setSignupData({
-              ...signupData,
-              email: e.target.value,
-            });
-          }}
-        />
-        <label htmlFor="password">Password : </label>
-        <input
-          type="text"
-          id="password"
-          name="password"
-          value={signupData.password}
-          onChange={(e) => {
-            setSignupData({
-              ...signupData,
-              password: e.target.value,
-            });
-          }}
-        />
-        <button variant="primary" type="submit" onClick={handleSubmit}>
-          Signup
-        </button>
-      </SForm>
+      </Helmet>
+      <Nav />
+      <Main>
+        <SForm onSubmit={handleSubmit}>
+          <h1>Let's get started 👋</h1>
+          <h4>Join our platform and find the teacher that can help you!</h4>
+          <Slabel htmlFor="firstName">First name : </Slabel>
+          <SInput
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={signupData.firstName}
+            onChange={(e) => {
+              setSignupData({
+                ...signupData,
+                firstName: e.target.value,
+              });
+            }}
+          />
+          <Slabel htmlFor="lastName">Last name : </Slabel>
+          <SInput
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={signupData.lastName}
+            onChange={(e) => {
+              setSignupData({
+                ...signupData,
+                lastName: e.target.value,
+              });
+            }}
+          />
+          <Slabel htmlFor="email">Email : </Slabel>
+          <SInput
+            type="text"
+            id="email"
+            name="email"
+            value={signupData.email}
+            onChange={(e) => {
+              setSignupData({
+                ...signupData,
+                email: e.target.value,
+              });
+            }}
+          />
+          <Slabel htmlFor="password">Password : </Slabel>
+          <SInput
+            type="text"
+            id="password"
+            name="password"
+            value={signupData.password}
+            onChange={(e) => {
+              setSignupData({
+                ...signupData,
+                password: e.target.value,
+              });
+            }}
+          />
+          {error ? <ErrorText>{error}</ErrorText> : ""}
+          <SButton variant="primary" type="submit" onClick={handleSubmit}>
+            Start now!
+          </SButton>
+        </SForm>
+      </Main>
     </main>
   );
 }
 
+const Main = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const SForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 12rem;
-  margin-left: 2rem;
+  width: 21rem;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  h1 {
+    width: 22rem;
+    font-family: "Comfortaa";
+  }
+  h4 {
+    width: 23rem;
+    color: #5d5d5d;
+  }
+`;
+
+const SInput = styled.input`
+  font-size: 0.9rem;
+  height: 1.5rem;
+  margin-bottom: 1rem;
+  text-indent: 0.3rem;
+  border-radius: 0.3rem;
+  border: 0.1rem solid grey;
+`;
+const Slabel = styled.label`
+  margin-bottom: 0.3rem;
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  font-size: 0.9rem;
+`;
+const SButton = styled.button`
+  border-radius: 0.3rem;
+  height: 2rem;
+  width: 15rem;
+  align-self: center;
   margin-top: 1rem;
+  border: none;
+  background-color: #87cefa;
+  font-family: "Comfortaa";
+  cursor: pointer;
+  transition: transform 0.2s;
+  :hover {
+    transform: scale(1.13, 1.13);
+  }
+  :active {
+    background-color: #79b9e1;
+  }
 `;
 
 export default StudentSignup;
