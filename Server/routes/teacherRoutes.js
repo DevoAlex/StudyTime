@@ -4,6 +4,7 @@ const {
   signup,
   login,
   getSingleTeacher,
+  getTeachers,
 } = require("../controllers/teacherControllers");
 
 // * routes
@@ -19,6 +20,8 @@ router.get("/login", (req, res) => {
   res.status(200).send("Login here");
 });
 
-router.get("/api/:teacherID", getSingleTeacher);
+router.get("/api/teachers", getTeachers);
+
+router.get("/api/teachers/:teacherID", getSingleTeacher);
 
 module.exports = router;

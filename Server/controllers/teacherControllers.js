@@ -51,6 +51,15 @@ const login = async (req, res) => {
   }
 };
 
+const getTeachers = async (req, res) => {
+  try {
+    const teachers = await Teacher.find();
+    res.status(200).json({ success: true, data: teachers });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err });
+  }
+};
+
 const getSingleTeacher = async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.params.teacherID);
@@ -63,4 +72,4 @@ const getSingleTeacher = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, getSingleTeacher };
+module.exports = { signup, login, getTeachers, getSingleTeacher };

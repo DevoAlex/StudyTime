@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../components/Nav";
 
@@ -44,7 +45,7 @@ function StudentSignup() {
   };
 
   return (
-    <main>
+    <>
       <Helmet>
         <title>Student Signup - Study Time</title>
         <meta
@@ -113,9 +114,10 @@ function StudentSignup() {
           <SButton variant="primary" type="submit" onClick={handleSubmit}>
             Start now!
           </SButton>
+          <p>Already registered? <SLink to='/student-login'>Login</SLink></p>
         </SForm>
       </Main>
-    </main>
+    </>
   );
 }
 
@@ -127,16 +129,19 @@ const Main = styled.main`
 const SForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 21rem;
+  width: 16rem;
   margin-top: 1.5rem;
   font-size: 1.1rem;
+  justify-content: center;
   h1 {
-    width: 22rem;
+    padding-left: 3rem;
+    width: 18rem;
     font-family: "Comfortaa";
   }
-  h4 {
-    width: 23rem;
+  h4, p {
+    width: 18rem;
     color: #5d5d5d;
+    margin-top: 1.2rem;
   }
 `;
 
@@ -174,5 +179,9 @@ const SButton = styled.button`
     background-color: #79b9e1;
   }
 `;
+const SLink = styled(Link)`
+  text-decoration: none;
+  color: #79b9e1;
+`
 
 export default StudentSignup;

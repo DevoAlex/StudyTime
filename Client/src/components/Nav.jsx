@@ -48,18 +48,18 @@ const Navbar = styled.div`
   justify-content: space-between;
 `;
 const Title = styled.h2`
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   letter-spacing: 0.1rem;
   font-family: "Federo";
   margin-left: 1.5rem;
 `;
 const Logo = styled.img`
-  height: 2.7rem;
+  height: 2.2rem;
   margin-left: 1rem;
   margin-top: -0.8rem;
 `;
 const UserImg = styled.img`
-  height: 2.2rem;
+  height: 2rem;
   position: relative;
   margin-right: 1rem;
   cursor: pointer;
@@ -69,7 +69,7 @@ const Container = styled.div`
   align-items: center;
 `;
 const Decoration = styled.div`
-  width: 13.3rem;
+  width: 10.3rem;
   height: 0.3rem;
   background-color: #87CEFA;
   position: absolute;
@@ -77,7 +77,7 @@ const Decoration = styled.div`
   left: 1rem;
   div {
     background-color: red;
-    width: 6.65rem;
+    width: 5.15rem;
     height: 0.3rem;
   }
 `;

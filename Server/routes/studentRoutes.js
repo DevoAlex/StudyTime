@@ -6,7 +6,6 @@ const {
   login,
   getSingleStudent,
 } = require("../controllers/studentControllers");
-const Student = require("../models/studentModel");
 
 router.options('/signup', cors())
 router.post("/signup", signup);
