@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Nav from "../components/Nav";
 
 function StudentSignup() {
   const [signupData, setSignupData] = useState({
@@ -53,7 +52,6 @@ function StudentSignup() {
           content="Register to Study Time to find someone who helps you to prepare your next exam or do your homeworks. "
         />
       </Helmet>
-      <Nav />
       <Main>
         <SForm onSubmit={handleSubmit}>
           <h1>Let's get started 👋</h1>
@@ -86,7 +84,7 @@ function StudentSignup() {
           />
           <Slabel htmlFor="email">Email : </Slabel>
           <SInput
-            type="text"
+            type="email"
             id="email"
             name="email"
             value={signupData.email}
@@ -99,7 +97,7 @@ function StudentSignup() {
           />
           <Slabel htmlFor="password">Password : </Slabel>
           <SInput
-            type="text"
+            type="password"
             id="password"
             name="password"
             value={signupData.password}
@@ -114,7 +112,9 @@ function StudentSignup() {
           <SButton variant="primary" type="submit" onClick={handleSubmit}>
             Start now!
           </SButton>
-          <p>Already registered? <SLink to='/student-login'>Login</SLink></p>
+          <SlinkText>
+            Already registered? <SLink to="/student-login">Login</SLink>
+          </SlinkText>
         </SForm>
       </Main>
     </>
@@ -135,11 +135,11 @@ const SForm = styled.form`
   justify-content: center;
   h1 {
     padding-left: 3rem;
-    width: 18rem;
+    width: 13rem;
     font-family: "Comfortaa";
   }
-  h4, p {
-    width: 18rem;
+  h4 {
+    width: 16rem;
     color: #5d5d5d;
     margin-top: 1.2rem;
   }
@@ -164,7 +164,7 @@ const ErrorText = styled.p`
 const SButton = styled.button`
   border-radius: 0.3rem;
   height: 2rem;
-  width: 15rem;
+  width: 16rem;
   align-self: center;
   margin-top: 1rem;
   border: none;
@@ -182,6 +182,11 @@ const SButton = styled.button`
 const SLink = styled(Link)`
   text-decoration: none;
   color: #79b9e1;
-`
+`;
+const SlinkText = styled.p`
+  width: 18rem;
+  color: #5d5d5d;
+  margin-top: 2rem;
+`;
 
 export default StudentSignup;

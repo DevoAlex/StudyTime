@@ -67,7 +67,6 @@ const teacherSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      default: "not set",
       validate(value) {
         if (!validator.isIn(value, ["male", "female", "not set"])) {
           throw new Error("Gender must be 'male', 'female' or 'not set'");
