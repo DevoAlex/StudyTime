@@ -5,6 +5,7 @@ import StudentLogin from './StudentLogin'
 import TeacherSignup from './TeacherSignup'
 import TeacherLogin from './TeacherLogin'
 import Home from "./Home";
+import StudentHome from './StudentHome'
 
 function Pages() {
     return(
@@ -14,6 +15,7 @@ function Pages() {
             <Route path="/student-signup" element={<StudentSignup />} />
             <Route path="/teacher-login" element={<TeacherLogin />} />
             <Route path="/teacher-signup" element={<TeacherSignup />} />
+            <Route path="/student-home" element={<StudentHome />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )
