@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { MultiSelect } from 'react-multi-select-component'
 
 function TeacherSignup() {
   const [signupData, setSignupData] = useState({
@@ -10,17 +11,16 @@ function TeacherSignup() {
     lastName: "",
     email: "",
     password: "",
-    subjects: "",
-    availableDays: "",
+    subjects: [],
+    availableDays: [],
     pricePerHour: "",
     city: "",
     gender: "",
     introduction: "",
-    availableForHomeworksHelp: '',
-    availableForExamPreparation: '',
-    availableForStudyHelp: '',
+    availableFor: []
   });
   const [error, setError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   const configuration = {
     method: "post",
@@ -36,14 +36,13 @@ function TeacherSignup() {
       city: signupData.city,
       gender: signupData.gender,
       introduction: signupData.introduction,
-      availableForHomeworksHelp: signupData.availableForHomeworksHelp,
-      availableForExamPreparation:signupData.availableForExamPreparation,
-      availableForStudyHelp:signupData.availableForStudyHelp,
+      availableFor: signupData.availableFor
     },
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if ( signupData.password === confirmPassword) {
     try {
       await axios(configuration).then((res) => console.log(res));
       setSignupData({
@@ -51,15 +50,13 @@ function TeacherSignup() {
         lastName: "",
         email: "",
         password: "",
-        subjects: "",
-        availableDays: "",
+        subjects: [],
+        availableDays: [],
         pricePerHour: "",
         city: "",
         gender: "",
         introduction: "",
-        availableForHomeworksHelp: '',
-        availableForExamPreparation: '',
-        availableForStudyHelp: '',
+        availableFor: []
       });
     } catch (err) {
       console.log(err.response.data);
@@ -68,7 +65,35 @@ function TeacherSignup() {
         console.log(error);
       }
     }
+  }
   };
+
+  const subjectSelectOptions = [
+    { label: 'History', value: 'history'},
+    { label: 'Grammar', value: 'grammar'},
+    { label: 'Mathematics', value: 'mathematics'},
+    { label: 'Geography', value: 'geography'},
+    { label: 'Art history', value: 'art history'},
+    { label: 'Computer Science', value: 'computer science'},
+    { label: 'Physical Education', value: 'physical education'},
+    { label: 'Geometry', value: 'geometry'},
+  ]
+
+  const daysSelectOptions = [
+    { label: 'Monday', value: 'monday'},
+    { label: 'Tuesday', value: 'tuesday'},
+    { label: 'Wednesday', value: 'wednesday'},
+    { label: 'Thursday', value: 'thursday'},
+    { label: 'Friday', value: 'friday'},
+    { label: 'Saturday', value: 'saturday'},
+    { label: 'Sunday', value: 'sunday'},
+  ]
+
+  const availableOptions = [
+    {label: 'Homework help', value: 'homework help'},
+    {label: 'Study help', value: 'study help'},
+    {label: 'Exam preparation', value: 'exam preparation'},
+  ]
 
   return (
     <>
@@ -138,32 +163,40 @@ function TeacherSignup() {
               });
             }}
           />
+          <Slabel htmlFor="confirmPassword"> Confirm password : </Slabel>
+          <SInput
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           <Slabel htmlFor="subjects">Subjects : </Slabel>
-          <SInput
-            type="text"
-            id="subjects"
-            name="subjects"
-            value={signupData.subjects}
+          <SMultiSelect
+            name='subjects'
+            options= {subjectSelectOptions}
+            value= {signupData.subjects}
+            isCreatable = {true}
+            hasSelectAll = {false}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
-                subjects: e.target.value,
+                subjects: e,
               });
             }}
-          />
-          <Slabel htmlFor="availableDays">Days available : </Slabel>
-          <SInput
-            type="text"
-            id="availableDays"
-            name="availableDays"
-            value={signupData.availableDays}
+           />
+          <Slabel htmlFor="availableDays">Available days : </Slabel>
+          <SMultiSelect
+          name = 'availableDays'
+            options= {daysSelectOptions}
+            value= {signupData.availableDays}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
-                availableDays: e.target.value,
+                availableDays: e,
               });
             }}
-          />
+           />
           <Slabel htmlFor="pricePerHour">Price / hour : </Slabel>
           <SInput
             type="number"
@@ -208,7 +241,7 @@ function TeacherSignup() {
             <option value="man">Man</option>
             <option value="woman">Woman</option>
           </SSelect>
-          <Slabel htmlFor="introduction">introduction : </Slabel>
+          <Slabel htmlFor="introduction">Introduction : </Slabel>
           <STextArea
             value={signupData.introduction}
             onChange={(e) => {
@@ -218,51 +251,18 @@ function TeacherSignup() {
               });
             }}
           ></STextArea>
-          <Checboxcontainer>
-          <Slabel htmlFor="availableForHomeworksHelp">I'm available for homework help : </Slabel>
-          <SInput
-            type="checkbox"
-            id="availableForHomeworksHelp"
-            name="availableForHomeworksHelp"
-            value={signupData.availableForHomeworksHelp}
+          <Slabel htmlFor="introduction">Available for : </Slabel>
+          <SMultiSelect
+          name = 'availableFor'
+            options= {availableOptions}
+            value= {signupData.availableFor}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
-                availableForHomeworksHelp: e.target.value,
+                availableFor: e,
               });
             }}
-          />
-          </Checboxcontainer>
-          <Checboxcontainer>
-          <Slabel htmlFor="availableForStudyHelp">I'm available for study help : </Slabel>
-          <SInput
-            type="checkbox"
-            id="availableForStudyHelp"
-            name="availableForStudyHelp"
-            value={signupData.availableForStudyHelp}
-            onChange={(e) => {
-              setSignupData({
-                ...signupData,
-                availableForStudyHelp: e.target.value,
-              });
-            }}
-          />
-          </Checboxcontainer>
-          <Checboxcontainer>
-          <Slabel htmlFor="availableForExamPreparation">I'm available for exam preparation : </Slabel>
-          <SInput
-            type="checkbox"
-            id="availableForExamPreparation"
-            name="availableForExamPreparation"
-            value={signupData.availableForExamPreparation}
-            onChange={(e) => {
-              setSignupData({
-                ...signupData,
-                availableForExamPreparation: e.target.value,
-              });
-            }}
-          />
-          </Checboxcontainer>
+           />
           {error ? <ErrorText>{error}</ErrorText> : ""}
           <SButton variant="primary" type="submit" onClick={handleSubmit}>
             Start now!
@@ -367,6 +367,13 @@ const STextArea = styled.textarea`
   margin-bottom: 1rem;
   font-size: 0.9rem;
   font-family: 'Montserrat';
+`
+const SMultiSelect = styled(MultiSelect)`
+  font-size: 0.9rem;
+  text-indent: 0.3rem;
+  border-radius: 0.3rem;
+  border: 0.1rem solid grey;
+  margin-bottom: 1rem;
 `
 
 export default TeacherSignup;

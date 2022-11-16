@@ -41,16 +41,12 @@ const teacherSchema = new mongoose.Schema(
       },
     },
     subjects: {
-      type: String,
-      validate(value) {
-        if (!validator.isAlpha(value)) {
-          throw new Error("Subjects must contain only letters");
-        }
-      },
+      type: Array,
+      default: []
     },
     daysOfAvailability: {
-      type: String,
-      default: "",
+      type: Array,
+      default: [],
     },
     pricePerHour: {
       type: String,
@@ -68,8 +64,8 @@ const teacherSchema = new mongoose.Schema(
     gender: {
       type: String,
       validate(value) {
-        if (!validator.isIn(value, ["male", "female", "not set"])) {
-          throw new Error("Gender must be 'male', 'female' or 'not set'");
+        if (!validator.isIn(value, ["man", "woman", "not set"])) {
+          throw new Error("Gender must be 'man', 'woman' or 'not set'");
         }
       },
     },
@@ -81,29 +77,9 @@ const teacherSchema = new mongoose.Schema(
         }
       },
     },
-    availableForHomeworksHelp: {
-      type: String,
-      validate(value) {
-        if (!validator.isBoolean(value)) {
-          throw new Error("Availability must have value true or false");
-        }
-      },
-    },
-    availableForExamPreparation: {
-      type: String,
-      validate(value) {
-        if (!validator.isBoolean(value)) {
-          throw new Error("Availability must have value true or false");
-        }
-      },
-    },
-    availableForStudyHelp: {
-      type: String,
-      validate(value) {
-        if (!validator.isBoolean(value)) {
-          throw new Error("Availability must have value true or false");
-        }
-      },
+    availableFor: {
+      type: Array,
+      default: []
     },
   },
   {
