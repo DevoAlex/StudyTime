@@ -20,8 +20,8 @@ router.get("/login", (req, res) => {
   res.status(200).send("Login here");
 });
 
-router.get("/api/teachers", getTeachers);
+router.get("/api", getTeachers);
 
-router.get("/api/teachers/:teacherID", getSingleTeacher);
+router.get("/api/:teacherID", getSingleTeacher);
 
 module.exports = router;
