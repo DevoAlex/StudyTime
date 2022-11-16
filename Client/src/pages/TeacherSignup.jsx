@@ -15,7 +15,7 @@ function TeacherSignup() {
     availableDays: [],
     pricePerHour: "",
     city: "",
-    gender: "",
+    gender: "not set",
     introduction: "",
     availableFor: [],
   });
@@ -54,11 +54,12 @@ function TeacherSignup() {
           availableDays: [],
           pricePerHour: "",
           city: "",
-          gender: "",
+          gender: "not set",
           introduction: "",
           availableFor: [],
         });
         setConfirmPassword("");
+        setError('')
       } catch (err) {
         console.log(err.response.data);
         if (err.response.data.name === "ValidationError") {
@@ -242,7 +243,7 @@ function TeacherSignup() {
               });
             }}
           >
-            <option selected value="not set">
+            <option value="not set">
               Not set
             </option>
             <option value="man">Man</option>
