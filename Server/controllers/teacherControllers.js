@@ -8,13 +8,12 @@ const signup = async (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     subjects: req.body.subjects,
-    daysOfAvailability: req.body.daysOfAvailability,
+    availableDays: req.body.availableDays,
+    gender: req.body.gender,
     pricePerHour: req.body.pricePerHour,
     introduction: req.body.introduction,
-    availableForHomeworksHelp: req.body.availableForHomeworksHelp,
-    availableForExamPreparation: req.body.availableForExamPreparation,
-    availableForStudyHelp: req.body.availableForStudyHelp,
-    gender: req.body.gender,
+    availableFor: req.body.availableFor,
+    city: req.body.city
   });
   try {
     await teacher.save();

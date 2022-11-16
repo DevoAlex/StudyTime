@@ -31,7 +31,7 @@ function TeacherSignup() {
       email: signupData.email,
       password: signupData.password,
       subjects: signupData.subjects,
-      daysOfAvailability: signupData.availableDays,
+      availableDays: signupData.availableDays,
       pricePerHour: signupData.pricePerHour,
       city: signupData.city,
       gender: signupData.gender,

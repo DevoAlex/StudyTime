@@ -42,15 +42,15 @@ const teacherSchema = new mongoose.Schema(
     },
     subjects: {
       type: Array,
-      default: []
+      default: [],
     },
-    daysOfAvailability: {
+    availableDays: {
       type: Array,
       default: [],
     },
     pricePerHour: {
       type: String,
-      default: '0',
+      default: "0",
       validate(value) {
         if (!validator.isNumeric(value)) {
           throw new Error("Price must contain only numbers");
@@ -59,7 +59,7 @@ const teacherSchema = new mongoose.Schema(
     },
     availableFor: {
       type: Array,
-      default: []
+      default: [],
     },
     introduction: {
       type: String,
@@ -67,7 +67,7 @@ const teacherSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      default: 'not set',
+      default: "not set",
       validate(value) {
         if (!validator.isIn(value, ["man", "woman", "not set"])) {
           throw new Error("Gender must be 'Man', 'Woman' or 'Not set'");
