@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { MultiSelect } from 'react-multi-select-component'
+import { MultiSelect } from "react-multi-select-component";
 
 function TeacherSignup() {
   const [signupData, setSignupData] = useState({
@@ -17,10 +17,10 @@ function TeacherSignup() {
     city: "",
     gender: "",
     introduction: "",
-    availableFor: []
+    availableFor: [],
   });
   const [error, setError] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const configuration = {
     method: "post",
@@ -31,69 +31,76 @@ function TeacherSignup() {
       email: signupData.email,
       password: signupData.password,
       subjects: signupData.subjects,
-      availableDays: signupData.availableDays,
+      daysOfAvailability: signupData.availableDays,
       pricePerHour: signupData.pricePerHour,
       city: signupData.city,
       gender: signupData.gender,
       introduction: signupData.introduction,
-      availableFor: signupData.availableFor
+      availableFor: signupData.availableFor,
     },
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if ( signupData.password === confirmPassword) {
-    try {
-      await axios(configuration).then((res) => console.log(res));
-      setSignupData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        subjects: [],
-        availableDays: [],
-        pricePerHour: "",
-        city: "",
-        gender: "",
-        introduction: "",
-        availableFor: []
-      });
-    } catch (err) {
-      console.log(err.response.data);
-      if (err.response.data.name === "ValidationError") {
-        setError(err.response.data.message.split(": ").slice(2));
-        console.log(error);
+    if (signupData.password === confirmPassword) {
+      try {
+        await axios(configuration).then((res) => console.log(res));
+        setSignupData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          subjects: [],
+          availableDays: [],
+          pricePerHour: "",
+          city: "",
+          gender: "",
+          introduction: "",
+          availableFor: [],
+        });
+        setConfirmPassword("");
+      } catch (err) {
+        console.log(err.response.data);
+        if (err.response.data.name === "ValidationError") {
+          setError(err.response.data.message.split(": ").slice(2));
+          console.log(error);
+        }
       }
+    } else {
+      setError("Passwords doesn't match")
+     throw new Error(`Passwords doesn't match`);
+     
     }
-  }
   };
 
+  //Testpassword8?
+
   const subjectSelectOptions = [
-    { label: 'History', value: 'history'},
-    { label: 'Grammar', value: 'grammar'},
-    { label: 'Mathematics', value: 'mathematics'},
-    { label: 'Geography', value: 'geography'},
-    { label: 'Art history', value: 'art history'},
-    { label: 'Computer Science', value: 'computer science'},
-    { label: 'Physical Education', value: 'physical education'},
-    { label: 'Geometry', value: 'geometry'},
-  ]
+    { label: "History", value: "history" },
+    { label: "Grammar", value: "grammar" },
+    { label: "Mathematics", value: "mathematics" },
+    { label: "Geography", value: "geography" },
+    { label: "Art history", value: "art history" },
+    { label: "Computer Science", value: "computer science" },
+    { label: "Physical Education", value: "physical education" },
+    { label: "Geometry", value: "geometry" },
+  ];
 
   const daysSelectOptions = [
-    { label: 'Monday', value: 'monday'},
-    { label: 'Tuesday', value: 'tuesday'},
-    { label: 'Wednesday', value: 'wednesday'},
-    { label: 'Thursday', value: 'thursday'},
-    { label: 'Friday', value: 'friday'},
-    { label: 'Saturday', value: 'saturday'},
-    { label: 'Sunday', value: 'sunday'},
-  ]
+    { label: "Monday", value: "monday" },
+    { label: "Tuesday", value: "tuesday" },
+    { label: "Wednesday", value: "wednesday" },
+    { label: "Thursday", value: "thursday" },
+    { label: "Friday", value: "friday" },
+    { label: "Saturday", value: "saturday" },
+    { label: "Sunday", value: "sunday" },
+  ];
 
   const availableOptions = [
-    {label: 'Homework help', value: 'homework help'},
-    {label: 'Study help', value: 'study help'},
-    {label: 'Exam preparation', value: 'exam preparation'},
-  ]
+    { label: "Homework help", value: "homework help" },
+    { label: "Study help", value: "study help" },
+    { label: "Exam preparation", value: "exam preparation" },
+  ];
 
   return (
     <>
@@ -173,30 +180,30 @@ function TeacherSignup() {
           />
           <Slabel htmlFor="subjects">Subjects : </Slabel>
           <SMultiSelect
-            name='subjects'
-            options= {subjectSelectOptions}
-            value= {signupData.subjects}
-            isCreatable = {true}
-            hasSelectAll = {false}
+            name="subjects"
+            options={subjectSelectOptions}
+            value={signupData.subjects}
+            isCreatable={true}
+            hasSelectAll={false}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
                 subjects: e,
               });
             }}
-           />
+          />
           <Slabel htmlFor="availableDays">Available days : </Slabel>
           <SMultiSelect
-          name = 'availableDays'
-            options= {daysSelectOptions}
-            value= {signupData.availableDays}
+            name="availableDays"
+            options={daysSelectOptions}
+            value={signupData.availableDays}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
                 availableDays: e,
               });
             }}
-           />
+          />
           <Slabel htmlFor="pricePerHour">Price / hour : </Slabel>
           <SInput
             type="number"
@@ -251,18 +258,19 @@ function TeacherSignup() {
               });
             }}
           ></STextArea>
-          <Slabel htmlFor="introduction">Available for : </Slabel>
+          <Slabel htmlFor="availableFor">Available for : </Slabel>
           <SMultiSelect
-          name = 'availableFor'
-            options= {availableOptions}
-            value= {signupData.availableFor}
+            name="availableFor"
+            disableSearch = {true}
+            options={availableOptions}
+            value={signupData.availableFor}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
                 availableFor: e,
               });
             }}
-           />
+          />
           {error ? <ErrorText>{error}</ErrorText> : ""}
           <SButton variant="primary" type="submit" onClick={handleSubmit}>
             Start now!
@@ -357,7 +365,7 @@ const SSelect = styled.select`
   border-radius: 0.3rem;
   border: 0.1rem solid grey;
   margin-bottom: 1rem;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 `;
 const STextArea = styled.textarea`
   resize: none;
@@ -366,14 +374,14 @@ const STextArea = styled.textarea`
   border: 0.1rem solid grey;
   margin-bottom: 1rem;
   font-size: 0.9rem;
-  font-family: 'Montserrat';
-`
+  font-family: "Montserrat";
+`;
 const SMultiSelect = styled(MultiSelect)`
   font-size: 0.9rem;
   text-indent: 0.3rem;
   border-radius: 0.3rem;
   border: 0.1rem solid grey;
   margin-bottom: 1rem;
-`
+`;
 
 export default TeacherSignup;
