@@ -57,6 +57,10 @@ const teacherSchema = new mongoose.Schema(
         }
       },
     },
+    availableFor: {
+      type: Array,
+      default: []
+    },
     introduction: {
       type: String,
       default: "",
@@ -77,10 +81,6 @@ const teacherSchema = new mongoose.Schema(
           throw new Error("City name must contain only letters");
         }
       },
-    },
-    availableFor: {
-      type: Array,
-      default: []
     },
   },
   {
