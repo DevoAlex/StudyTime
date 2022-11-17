@@ -49,4 +49,41 @@ const getSingleStudent = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, getSingleStudent };
+const updateStudent = async (req, res) => {
+  try {
+    const updatedStudent = await Student.updateOne(
+      { _id: req.params.studentID },
+      {
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: req.body.password,
+        },
+      },
+      { upsert: true }
+    );
+    res.status(200).json({
+      success: true,
+      message: `Student with ID ${req.params.studentID} updated`,
+      data: updatedStudent,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deleteStudent = async ( req, res) => {
+  try {
+    const deletedStudent = await Student.remove({_id: req.params.studentID});
+    res.staù(200).json({
+      success: true,
+      message: `Student with ID ${req.params.teacherID} removed`,
+      data: deletedStudent
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+module.exports = { signup, login, getSingleStudent, updateStudent, deleteStudent };

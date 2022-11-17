@@ -5,20 +5,26 @@ const {
   login,
   getSingleTeacher,
   getTeachers,
+  updateTeacher,
+  deleteTeacher
 } = require("../controllers/teacherControllers");
 
 // * routes
 router.post("/signup", signup);
 
 router.get("/signup", (req, res) => {
-  res.status(200).send("Signup here");
+  res.status(200).send("Teacher signup here");
 });
 
 router.post("/login", login);
 
 router.get("/login", (req, res) => {
-  res.status(200).send("Login here");
+  res.status(200).send("Teacher login here");
 });
+
+router.patch('/:teacherID', updateTeacher);
+
+router.delete('/:teacherID', deleteTeacher)
 
 router.get("/api", getTeachers);
 

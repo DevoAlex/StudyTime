@@ -13,7 +13,7 @@ const signup = async (req, res, next) => {
     pricePerHour: req.body.pricePerHour,
     introduction: req.body.introduction,
     availableFor: req.body.availableFor,
-    city: req.body.city
+    city: req.body.city,
   });
   try {
     await teacher.save();
@@ -71,4 +71,48 @@ const getSingleTeacher = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, getTeachers, getSingleTeacher };
+const updateTeacher = async (req, res) => {
+  try {
+    const updatedTeacher = await Teacher.updateOne(
+      { _id: req.params.teacherID },
+      {
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: req.body.password,
+          subjects: req.body.subjects,
+          availableDays: req.body.availableDays,
+          gender: req.body.gender,
+          pricePerHour: req.body.pricePerHour,
+          introduction: req.body.introduction,
+          availableFor: req.body.availableFor,
+          city: req.body.city,
+        },
+      },
+      { upsert: true }
+    );
+    res.status(200).json({
+      success: true,
+      message: `Teacher with ID ${req.params.teacherID} updated`,
+      data: updatedTeacher,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deleteTeacher = async ( req, res) => {
+  try {
+    const deletedTeacher = await Teacher.remove({_id: req.params.teacherID});
+    res.staù(200).json({
+      success: true,
+      message: `Teacher with ID ${req.params.teacherID} removed`,
+      data: deletedTeacher
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+module.exports = { signup, login, getTeachers, getSingleTeacher, updateTeacher, deleteTeacher };
