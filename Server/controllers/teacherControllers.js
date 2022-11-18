@@ -105,7 +105,7 @@ const updateTeacher = async (req, res) => {
 const deleteTeacher = async ( req, res) => {
   try {
     const deletedTeacher = await Teacher.remove({_id: req.params.teacherID});
-    res.staù(200).json({
+    res.status(200).json({
       success: true,
       message: `Teacher with ID ${req.params.teacherID} removed`,
       data: deletedTeacher
