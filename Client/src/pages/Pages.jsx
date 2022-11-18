@@ -6,6 +6,7 @@ import TeacherSignup from './TeacherSignup'
 import TeacherLogin from './TeacherLogin'
 import Home from "./Home";
 import StudentHome from './StudentHome'
+import ProtectedRoute from "../components/ProtectedRoutes";
 
 function Pages() {
     return(
@@ -15,7 +16,9 @@ function Pages() {
             <Route path="/student-signup" element={<StudentSignup />} />
             <Route path="/teacher-login" element={<TeacherLogin />} />
             <Route path="/teacher-signup" element={<TeacherSignup />} />
-            <Route path="/student-home" element={<StudentHome />} />
+            <Route exact path="/student-home" element={<ProtectedRoute />}>
+                <Route path="/student-home" element={<StudentHome />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
         </Routes>
     )

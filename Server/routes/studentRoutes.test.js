@@ -109,7 +109,7 @@ describe("Student endpoint", () => {
     const testStudent = {
       firstName: "testName",
       lastName: "testLastName",
-      email: "tesmail@test.com",
+      email: "testmail@test.com",
     };
     return await request
       .patch(`/students/${testId}`)

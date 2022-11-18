@@ -35,7 +35,7 @@ function StudentHome() {
         <div>
          {teachers.map((item) => {
             return(
-                <div>
+                <div key={item._id}>
                     <h1>Hi i'm {item.firstName}</h1>
                 </div>
             )

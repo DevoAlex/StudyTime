@@ -75,7 +75,7 @@ const updateStudent = async (req, res) => {
 
 const deleteStudent = async ( req, res) => {
   try {
-    const deletedStudent = await Student.remove({_id: req.params.studentID});
+    const deletedStudent = await Student.deleteOne({_id: req.params.studentID});
     res.status(200).json({
       success: true,
       message: `Student with ID ${req.params.teacherID} removed`,

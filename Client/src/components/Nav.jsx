@@ -25,16 +25,15 @@ function Nav() {
         </Container>
         <Link to="#">
           <UserImg src={settingsImage} onClick={showUserSettings} />
-          {/* User settings here maybe? */}
         </Link>
       </Navbar>
-      {/* {isOpen ? (
+      {isOpen ? (
         <UserBar isOpen={isOpen} onClick={showUserSettings}>
-
+          <button onClick={showUserSettings}>test</button>
         </UserBar>
-    ) : (
-        ''
-    )} */}
+      ) : (
+        ""
+      )}
     </>
   );
 }
@@ -50,7 +49,8 @@ const Navbar = styled.div`
 const Title = styled.h2`
   font-size: 1.3rem;
   letter-spacing: 0.1rem;
-  font-family: "Federo", system-ui, -apple-system, 'Segoe UI', 'Open Sans', sans-serif;;
+  font-family: "Federo", system-ui, -apple-system, "Segoe UI", "Open Sans",
+    sans-serif;
   margin-left: 1.5rem;
 `;
 const Logo = styled.img`
@@ -71,7 +71,7 @@ const Container = styled.div`
 const Decoration = styled.div`
   width: 10.3rem;
   height: 0.3rem;
-  background-color: #87CEFA;
+  background-color: #87cefa;
   position: absolute;
   top: 0%;
   left: 1rem;
@@ -91,8 +91,28 @@ const Slink = styled(Link)`
     margin-left: 0.5rem;
   }
 `;
-// const UserBar = styled.div`
-
-// `
+const UserBar = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0rem;
+  right: 0rem;
+  height: 100%;
+  width: 10rem;
+  z-index: 2;
+  right: ${(props) => (props.isOpen ? "0" : "100%")};
+  background-color: #2d323e;
+  animation: showSideBar 0.3s;
+  @keyframes showSideBar {
+    from {
+      opacity: 0;
+      width: 0rem;
+    }
+    to {
+      opacity: 1;
+      width: 10rem;
+    }
+  }
+`;
 
 export default Nav;

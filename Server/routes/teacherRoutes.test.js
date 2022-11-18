@@ -54,17 +54,17 @@ describe("Student endpoint", () => {
   });
   test("Signup test", async () => {
     const testTeacher = {
-        firstName: "Dummy",
-        lastName: "Teacher",
-        email: "dummy@teacher.com",
-        password: "Dummyteacher9?",
-        subjects: [],
-        availableDays: [],
-        pricePerHour: '8',
-        availableFor: [],
-        introduction: 'Hi test teacher here!',
-        gender: 'not set',
-        city: 'Milan'
+      "firstName":"Donald",
+      "lastName":"Trump",
+      "email":"donaldtrump6@gmail.com",
+      "password":"Donato9=",
+      "subjects":["mathematics","history"],
+      "availableDays": ["monday"],
+      "pricePerHour":"4",
+      "city":"Milan",
+      "gender":"not set",
+      "introduction":"Hola",
+      "availableFor":["study help"]
     };
     return await request
       .post("/teachers/signup")

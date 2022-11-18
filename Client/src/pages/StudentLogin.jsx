@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Cookies from "universal-cookie";
 
 function StudentLogin() {
   const [loginData, setLoginData] = useState({
@@ -10,6 +11,8 @@ function StudentLogin() {
     password: "",
   });
   const [error, setError] = useState(false);
+
+  const cookies = new Cookies();
 
   const configuration = {
     method: "post",
@@ -23,7 +26,12 @@ function StudentLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios(configuration).then((res) => console.log(res));
+      await axios(configuration).then((res) => {
+        cookies.set("TOKEN", res.data.token, {
+          path: "/",
+        });
+        window.location.href = "/student-home";
+      });
       setLoginData({
         email: "",
         password: "",
