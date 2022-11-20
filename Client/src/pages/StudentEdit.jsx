@@ -52,7 +52,7 @@ function StudentUpdate() {
           firstName: res.data.data.firstName,
           lastName: res.data.data.lastName,
           email: res.data.data.email,
-          password: '',
+          password: ''
         })
       })
     } catch (err){
@@ -80,10 +80,10 @@ function StudentUpdate() {
         window.location.href = "/student-login";
       } catch (err) {
         console.log(err);
-        if (err.response.data.name === "ValidationError") {
-          setError(err.response.data.message.split(": ").slice(2));
-          console.log(error);
-        }
+        // if (err.response.data.name === "ValidationError") {
+        //   setError(err.response.data.message.split(": ").slice(2));
+        //   console.log(error);
+        // }
       }
     } else {
       setError("Passwords doesn't match");

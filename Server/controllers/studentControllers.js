@@ -1,5 +1,6 @@
 const Student = require("../models/studentModel");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const signup = async (req, res) => {
   const student = new Student(req.body);
@@ -61,6 +62,7 @@ const getSingleStudent = async (req, res) => {
 
 const updateStudent = async (req, res) => {
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 12)
     const updatedStudent = await Student.updateOne(
       { _id: req.params.studentID },
       {
@@ -68,7 +70,7 @@ const updateStudent = async (req, res) => {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
-          password: req.body.password,
+          password: hashedPassword,
         },
       },
       { upsert: true }
