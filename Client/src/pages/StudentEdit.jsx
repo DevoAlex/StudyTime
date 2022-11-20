@@ -51,7 +51,8 @@ function StudentUpdate() {
         setSignupData({
           firstName: res.data.data.firstName,
           lastName: res.data.data.lastName,
-          email: res.data.data.email
+          email: res.data.data.email,
+          password: ''
         })
       })
     } catch (err){
@@ -64,14 +65,15 @@ function StudentUpdate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (signupData.password === confirmPassword) {
+    
+     if (signupData.password === confirmPassword) {
       try {
         await axios(configuration).then((res) => console.log(res));
         setSignupData({
           firstName: "",
           lastName: "",
           email: "",
-          password: "",
+          password: ""
         });
         setConfirmPassword("");
         setError('')
