@@ -22,6 +22,7 @@ router.get("/login", (req, res) => {
   res.status(200).send("Student login here");
 });
 
+router.options('/:studentID', cors())
 router.patch('/:studentID', updateStudent);
 
 router.delete('/:studentID', deleteStudent);
