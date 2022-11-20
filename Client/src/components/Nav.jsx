@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LogoImage from "../images/logo.png";
 import settingsImage from "../images/settings.png";
-import { AiOutlineClose, AiOutlineLogout } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineLogout,
+  AiOutlineEdit,
+  AiOutlineHome,
+} from "react-icons/ai";
 import Cookies from "universal-cookie";
-import StudentImg from '../images/student.png'
-import TeacherImg from '../images/teacher.png'
+import StudentImg from "../images/student.png";
+import TeacherImg from "../images/teacher.png";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,15 +22,14 @@ function Nav() {
     setIsOpen(!isOpen);
   };
 
-  const isLogin = cookies.get('TOKEN')
-  const user = cookies.get('USER')
+  const isLogin = cookies.get("TOKEN");
+  const user = cookies.get("USER");
 
   const logout = () => {
     cookies.remove("TOKEN", { path: "/" });
     cookies.remove("USER", { path: "/" });
     window.location.href = "/";
   };
-
 
   return (
     <>
@@ -40,36 +44,62 @@ function Nav() {
           </Slink>
         </Container>
         <Link to="#">
-          <UserImg src={settingsImage} onClick={showUserSettings} />
+          <SettingsImg src={settingsImage} onClick={showUserSettings} />
         </Link>
       </Navbar>
       {isOpen ? (
         <UserBar isOpen={isOpen} onClick={showUserSettings}>
-        {user === 'student' ? (
-          <AvatarContainer>
-          <Avatar src={StudentImg} />
-          </AvatarContainer>
-          ) : ''}
-        {user === 'teacher' ? (
-          <AvatarContainer>
-          <Avatar src={TeacherImg} />
-          </AvatarContainer>
-          ) : ''}
-          
+          {user === "student" ? (
+            <AvatarContainer>
+              <Avatar src={StudentImg} />
+            </AvatarContainer>
+          ) : (
+            ""
+          )}
+          {user === "teacher" ? (
+            <AvatarContainer>
+              <Avatar src={TeacherImg} />
+            </AvatarContainer>
+          ) : (
+            ""
+          )}
+
           <Slink to="#">
             <AiOutlineClose style={{ height: "1rem", width: "1rem" }} />
             <p>Close</p>
           </Slink>
-          <Slink to="/student-edit">
-            <AiOutlineClose style={{ height: "1rem", width: "1rem" }} />
-            <p>Edit profile</p>
-          </Slink>
-          <LogoutBtn onClick={logout}>
-            <AiOutlineLogout
-              style={{ height: "1rem", width: "1rem" }}
-            />
-            <p>Logout</p>
-          </LogoutBtn>
+          {isLogin ? (
+            <Slink to="/home">
+              <AiOutlineHome style={{ height: "1rem", width: "1rem" }} />
+              <p>Home</p>
+            </Slink>
+          ) : (
+            <Slink to="/">
+              <AiOutlineHome style={{ height: "1rem", width: "1rem" }} />
+              <p>Home</p>
+            </Slink>
+          )}
+          {isLogin ? (
+            <>
+              {user === "student" ? (
+                <Slink to="/student-edit">
+                  <AiOutlineEdit style={{ height: "1rem", width: "1rem" }} />
+                  <p>Edit profile</p>
+                </Slink>
+              ) : (
+                <Slink to="/teacher-edit">
+                  <AiOutlineEdit style={{ height: "1rem", width: "1rem" }} />
+                  <p>Edit profile</p>
+                </Slink>
+              )}
+              <LogoutBtn onClick={logout}>
+                <AiOutlineLogout style={{ height: "1rem", width: "1rem" }} />
+                <p>Logout</p>
+              </LogoutBtn>
+            </>
+          ) : (
+            ""
+          )}
         </UserBar>
       ) : (
         ""
@@ -98,7 +128,7 @@ const Logo = styled.img`
   margin-left: 1rem;
   margin-top: -0.8rem;
 `;
-const UserImg = styled.img`
+const SettingsImg = styled.img`
   height: 2rem;
   width: 2rem;
   margin-top: 1rem;
@@ -176,20 +206,19 @@ const LogoutBtn = styled.button`
     transform: scale(1.13, 1.13);
     margin-left: 0.5rem;
   }
-`
+`;
 
 const AvatarContainer = styled.div`
   height: 4rem;
   text-align: center;
   width: 100%;
   padding-bottom: 1rem;
-`
+`;
 const Avatar = styled.img`
   height: 3rem;
   width: 3rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  
-`
+`;
 
 export default Nav;

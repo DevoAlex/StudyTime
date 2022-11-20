@@ -15,7 +15,7 @@ function StudentSignup() {
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const cookies = new Cookies()
+  const cookies = new Cookies();
 
   const configuration = {
     method: "post",
@@ -33,13 +33,13 @@ function StudentSignup() {
     if (signupData.password === confirmPassword) {
       try {
         await axios(configuration).then((res) => {
-          cookies.set('TOKEN', res.data.token, {
-            path: '/',
-          })
-          cookies.set('USER', 'student', {
-            path: '/',
-          })
-          window.location.href = '/student-home'
+          cookies.set("TOKEN", res.data.token, {
+            path: "/",
+          });
+          cookies.set("USER", "student", {
+            path: "/",
+          });
+          window.location.href = "/home";
         });
         setSignupData({
           firstName: "",
@@ -48,7 +48,7 @@ function StudentSignup() {
           password: "",
         });
         setConfirmPassword("");
-        setError('')
+        setError("");
       } catch (err) {
         console.log(err.response.data);
         if (err.response.data.name === "ValidationError") {

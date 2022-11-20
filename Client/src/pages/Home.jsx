@@ -2,9 +2,15 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Cookies from "universal-cookie";
 import backgroundImage from "../images/bg-image.jpg";
 
 function Home() {
+  const cookies = new Cookies();
+
+  const isLogin = cookies.get("TOKEN");
+  const user = cookies.get("USER");
+
   return (
     <Container>
       <Helmet>
@@ -21,9 +27,15 @@ function Home() {
         </h1>
       </HeroContainer>
       <LinkContainer>
-        <Link to="/student-login">
-          <LinkButton>Student</LinkButton>
-        </Link>
+        {isLogin && user === "student" ? (
+          <Link to="/home">
+            <LinkButton>Student</LinkButton>
+          </Link>
+        ) : (
+          <Link to="/student-login">
+            <LinkButton>Student</LinkButton>
+          </Link>
+        )}
 
         <Link to="/teacher-login">
           <LinkButton>Teacher</LinkButton>

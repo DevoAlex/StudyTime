@@ -59,7 +59,7 @@ function TeacherSignup() {
           availableFor: [],
         });
         setConfirmPassword("");
-        setError('')
+        setError("");
         window.location.href = "/teacher-login";
       } catch (err) {
         console.log(err.response.data);
@@ -69,9 +69,8 @@ function TeacherSignup() {
         }
       }
     } else {
-      setError("Passwords doesn't match")
-     throw new Error(`Passwords doesn't match`);
-     
+      setError("Passwords doesn't match");
+      throw new Error(`Passwords doesn't match`);
     }
   };
 
@@ -242,9 +241,7 @@ function TeacherSignup() {
               });
             }}
           >
-            <option value="not set">
-              Not set
-            </option>
+            <option value="not set">Not set</option>
             <option value="man">Man</option>
             <option value="woman">Woman</option>
           </SSelect>
@@ -261,11 +258,11 @@ function TeacherSignup() {
           <Slabel htmlFor="availableFor">Available for : </Slabel>
           <SMultiSelect
             name="availableFor"
-            disableSearch = {true}
+            disableSearch={true}
             options={availableOptions}
             value={signupData.availableFor}
             onChange={(e) => {
-              console.log(e)
+              console.log(e);
               setSignupData({
                 ...signupData,
                 availableFor: e,

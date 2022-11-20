@@ -30,10 +30,10 @@ function StudentLogin() {
         cookies.set("TOKEN", res.data.token, {
           path: "/",
         });
-        cookies.set('USER', 'student', {
-          path: '/'
+        cookies.set("USER", "student", {
+          path: "/",
         });
-        window.location.href = "/student-home";
+        window.location.href = "/home";
       });
       setLoginData({
         email: "",
