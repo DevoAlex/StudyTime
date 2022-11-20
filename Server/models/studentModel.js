@@ -54,6 +54,14 @@ studentSchema.pre("save", async function (next) {
   next();
 });
 
+studentSchema.pre("updateOne", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 12);
+  }
+  next();
+});
+
 studentSchema.methods.removeSensitiveFields = async function () {
   const student = this;
   const studentObject = student.toObject();

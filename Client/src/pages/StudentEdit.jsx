@@ -117,7 +117,7 @@ function StudentUpdate() {
             id="firstName"
             name="firstName"
             value={signupData.firstName}
-            placeholder={signupData.firstName}
+
             onChange={(e) => {
               setSignupData({
                 ...signupData,
@@ -131,7 +131,7 @@ function StudentUpdate() {
             id="lastName"
             name="lastName"
             value={signupData.lastName}
-            placeholder={signupData.lastName}
+
             onChange={(e) => {
               setSignupData({
                 ...signupData,
@@ -145,7 +145,7 @@ function StudentUpdate() {
             id="email"
             name="email"
             value={signupData.email}
-            placeholder={signupData.email}
+  
             onChange={(e) => {
               setSignupData({
                 ...signupData,

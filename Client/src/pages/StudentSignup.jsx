@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Cookies from "universal-cookie";
 
 function StudentSignup() {
   const [signupData, setSignupData] = useState({
@@ -13,6 +14,8 @@ function StudentSignup() {
   });
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const cookies = new Cookies()
 
   const configuration = {
     method: "post",
@@ -29,7 +32,15 @@ function StudentSignup() {
     e.preventDefault();
     if (signupData.password === confirmPassword) {
       try {
-        await axios(configuration).then((res) => console.log(res));
+        await axios(configuration).then((res) => {
+          cookies.set('TOKEN', res.data.token, {
+            path: '/',
+          })
+          cookies.set('USER', 'student', {
+            path: '/',
+          })
+          window.location.href = '/student-home'
+        });
         setSignupData({
           firstName: "",
           lastName: "",
@@ -38,7 +49,6 @@ function StudentSignup() {
         });
         setConfirmPassword("");
         setError('')
-        window.location.href = "/student-login";
       } catch (err) {
         console.log(err.response.data);
         if (err.response.data.name === "ValidationError") {
@@ -47,8 +57,8 @@ function StudentSignup() {
         }
       }
     } else {
-      setError("Passwords doesn't match");
-      throw new Error(`Passwords doesn't match`);
+      setError("Passwords does not match");
+      throw new Error(`Passwords does not match`);
     }
   };
 
