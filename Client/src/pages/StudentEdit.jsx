@@ -52,7 +52,7 @@ function StudentUpdate() {
           firstName: res.data.data.firstName,
           lastName: res.data.data.lastName,
           email: res.data.data.email,
-          password: '',
+          password: ''
         })
       })
     } catch (err){

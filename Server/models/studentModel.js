@@ -56,7 +56,7 @@ studentSchema.pre("save", async function (next) {
 
 studentSchema.pre("updateOne", async function (next) {
   const user = this;
-  if (user.password) {
+  if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 12);
   }
   next();
