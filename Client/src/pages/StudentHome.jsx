@@ -2,14 +2,25 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import LoadingSpinner from '../components/LoadingSpinner'
+import Cookies from 'universal-cookie';
+import jwt_decode from 'jwt-decode'
+
 
 function StudentHome() {
     const [teachers, setTeachers] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
+    const cookies = new Cookies()
+
+    const getUserData = () => {
+        const cookie = cookies.get('TOKEN')
+        const decoded = jwt_decode(cookie)
+        console.log(decoded)
+    }
+
     const fetchTeachers = async() => {
+        setIsLoading(true)
         try{
-            setIsLoading(true)
             await axios.get('https://study-time-api.herokuapp.com/teachers/api')
             .then((res) => {
                 const data = res.data.data
@@ -26,6 +37,7 @@ function StudentHome() {
 
     useEffect(() => {
         fetchTeachers()
+        getUserData()
     }, [])
 
   return (

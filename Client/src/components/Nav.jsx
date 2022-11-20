@@ -5,6 +5,8 @@ import LogoImage from "../images/logo.png";
 import settingsImage from "../images/settings.png";
 import { AiOutlineClose, AiOutlineLogout } from "react-icons/ai";
 import Cookies from "universal-cookie";
+import StudentImg from '../images/student.png'
+import TeacherImg from '../images/teacher.png'
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +15,9 @@ function Nav() {
 
   const showUserSettings = () => {
     setIsOpen(!isOpen);
-    console.log(user)
   };
 
+  const isLogin = cookies.get('TOKEN')
   const user = cookies.get('USER')
 
   const logout = () => {
@@ -45,12 +47,22 @@ function Nav() {
         <UserBar isOpen={isOpen} onClick={showUserSettings}>
         {user === 'student' ? (
           <AvatarContainer>
-          <Avatar>🧑‍🎓</Avatar>
+          <Avatar src={StudentImg} />
           </AvatarContainer>
           ) : ''}
+        {user === 'teacher' ? (
+          <AvatarContainer>
+          <Avatar src={TeacherImg} />
+          </AvatarContainer>
+          ) : ''}
+          
           <Slink to="#">
             <AiOutlineClose style={{ height: "1rem", width: "1rem" }} />
             <p>Close</p>
+          </Slink>
+          <Slink to="/student-edit">
+            <AiOutlineClose style={{ height: "1rem", width: "1rem" }} />
+            <p>Edit profile</p>
           </Slink>
           <LogoutBtn onClick={logout}>
             <AiOutlineLogout
@@ -167,15 +179,17 @@ const LogoutBtn = styled.button`
 `
 
 const AvatarContainer = styled.div`
-  justify-content: center;
-  align-items: center;
+  height: 4rem;
   text-align: center;
   width: 100%;
-  border: 1px solid red;
+  padding-bottom: 1rem;
 `
-const Avatar = styled.h2`
-  height: 2rem;
-  width: 2rem;
+const Avatar = styled.img`
+  height: 3rem;
+  width: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  
 `
 
 export default Nav;

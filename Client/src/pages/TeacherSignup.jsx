@@ -60,6 +60,7 @@ function TeacherSignup() {
         });
         setConfirmPassword("");
         setError('')
+        window.location.href = "/teacher-login";
       } catch (err) {
         console.log(err.response.data);
         if (err.response.data.name === "ValidationError") {
@@ -73,8 +74,6 @@ function TeacherSignup() {
      
     }
   };
-
-  //Testpassword8?
 
   const subjectSelectOptions = [
     { label: "History", value: "history" },

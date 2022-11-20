@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Cookies from 'universal-cookie';
+import jwt_decode from 'jwt-decode'
+import LoadingSpinner from '../components/LoadingSpinner'
 
-function StudentSignup() {
+function StudentUpdate() {
   const [signupData, setSignupData] = useState({
     firstName: "",
     lastName: "",
@@ -13,10 +16,25 @@ function StudentSignup() {
   });
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
+  const [userID, setUserID] = useState('')
+  const [userData, setUserData] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+  })
+
+  const cookies = new Cookies()
+
+  const getUserID = () => {
+    const cookie = cookies.get('TOKEN')
+    const decoded = jwt_decode(cookie)
+    setUserID(decoded.studentId)
+}
 
   const configuration = {
-    method: "post",
-    url: "https://study-time-api.herokuapp.com/students/signup",
+    method: "patch",
+    url: `https://study-time-api.herokuapp.com/students/${userID}`,
     data: {
       firstName: signupData.firstName,
       lastName: signupData.lastName,
@@ -24,6 +42,25 @@ function StudentSignup() {
       password: signupData.password,
     },
   };
+
+  const getUserData = async() => {
+    setIsLoading(true)
+    try{
+      await axios.get(`https://study-time-api.herokuapp.com/students/api/${userID}`)
+      .then((res) => {
+        setUserData({
+          firstName: res.data.data.firstName,
+          lastName: res.data.data.lastName,
+          email: res.data.data.email
+        })
+      })
+    } catch (err){
+      console.log(err)
+    } 
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,25 +89,35 @@ function StudentSignup() {
     }
   };
 
+  useEffect(() => {
+    getUserID()
+    getUserData()
+  },[])
+
   return (
     <>
+    {isLoading ? (
+        <LoadingSpinner />
+    ) : (
+      <>
       <Helmet>
-        <title>Student Signup - Study Time</title>
+        <title>Edit profile - Study Time</title>
         <meta
           name="description"
-          content="Register to Study Time to find someone who helps you to prepare your next exam or do your homeworks. "
+          content="Edit your Study Time profile."
         />
       </Helmet>
       <Main>
         <SForm onSubmit={handleSubmit}>
-          <h1>Let's get started 👋</h1>
-          <h4>Join our platform and find the teacher that can help you!</h4>
+          <h1>Edit Profile</h1>
+          <h4>Edit the fields that you want to modify!</h4>
           <Slabel htmlFor="firstName">First name : </Slabel>
           <SInput
             type="text"
             id="firstName"
             name="firstName"
             value={signupData.firstName}
+            placeholder={userData.firstName}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
@@ -84,6 +131,7 @@ function StudentSignup() {
             id="lastName"
             name="lastName"
             value={signupData.lastName}
+            placeholder={userData.lastName}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
@@ -97,6 +145,7 @@ function StudentSignup() {
             id="email"
             name="email"
             value={signupData.email}
+            placeholder={userData.email}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
@@ -127,13 +176,12 @@ function StudentSignup() {
           />
           {error ? <ErrorText>{error}</ErrorText> : ""}
           <SButton variant="primary" type="submit" onClick={handleSubmit}>
-            Start now!
+            Edit
           </SButton>
-          <SlinkText>
-            Already registered? <SLink to="/student-login">Login</SLink>
-          </SlinkText>
         </SForm>
       </Main>
+      </>
+    )}
     </>
   );
 }
@@ -184,6 +232,7 @@ const SButton = styled.button`
   width: 16rem;
   align-self: center;
   margin-top: 1rem;
+  margin-bottom: 2rem;
   border: none;
   background-color: #87cefa;
   font-family: "Comfortaa";
@@ -196,14 +245,5 @@ const SButton = styled.button`
     background-color: #79b9e1;
   }
 `;
-const SLink = styled(Link)`
-  text-decoration: none;
-  color: #79b9e1;
-`;
-const SlinkText = styled.p`
-  width: 18rem;
-  color: #5d5d5d;
-  margin-top: 2rem;
-`;
 
-export default StudentSignup;
+export default StudentUpdate;
