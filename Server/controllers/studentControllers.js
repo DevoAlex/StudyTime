@@ -5,7 +5,17 @@ const signup = async (req, res) => {
   const student = new Student(req.body);
   try {
     await student.save();
-    res.status(201).json({ success: true, data: student });
+    const key = process.env.PRIVATE_KEY;
+
+    const token = jwt.sign(
+      {
+        studentId: student._id,
+        studentEmail: student.email,
+      },
+      key,
+      { expiresIn: "24h" }
+    );
+    res.status(201).json({ success: true, data: student, token });
   } catch (err) {
     res.status(400).send(err);
   }

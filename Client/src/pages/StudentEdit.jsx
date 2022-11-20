@@ -18,11 +18,11 @@ function StudentUpdate() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false)
   const [userID, setUserID] = useState('')
-  const [userData, setUserData] = useState({
-    firstName: '',
-    lastName: '',
-    email: ''
-  })
+  // const [userData, setUserData] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: ''
+  // })
 
   const cookies = new Cookies()
 
@@ -48,7 +48,7 @@ function StudentUpdate() {
     try{
       await axios.get(`https://study-time-api.herokuapp.com/students/api/${userID}`)
       .then((res) => {
-        setUserData({
+        setSignupData({
           firstName: res.data.data.firstName,
           lastName: res.data.data.lastName,
           email: res.data.data.email
@@ -117,7 +117,7 @@ function StudentUpdate() {
             id="firstName"
             name="firstName"
             value={signupData.firstName}
-            placeholder={userData.firstName}
+            placeholder={signupData.firstName}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
@@ -131,7 +131,7 @@ function StudentUpdate() {
             id="lastName"
             name="lastName"
             value={signupData.lastName}
-            placeholder={userData.lastName}
+            placeholder={signupData.lastName}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
@@ -145,7 +145,7 @@ function StudentUpdate() {
             id="email"
             name="email"
             value={signupData.email}
-            placeholder={userData.email}
+            placeholder={signupData.email}
             onChange={(e) => {
               setSignupData({
                 ...signupData,
