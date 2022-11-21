@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MultiSelect } from "react-multi-select-component";
+import Cookies from "universal-cookie";
 
 function TeacherSignup() {
   const [signupData, setSignupData] = useState({
@@ -21,6 +22,8 @@ function TeacherSignup() {
   });
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const cookies = new Cookies()
 
   const configuration = {
     method: "post",
@@ -44,7 +47,15 @@ function TeacherSignup() {
     e.preventDefault();
     if (signupData.password === confirmPassword) {
       try {
-        await axios(configuration).then((res) => console.log(res));
+        await axios(configuration).then((res) => {
+          cookies.set("TOKEN", res.data.token, {
+            path: "/",
+          });
+          cookies.set("USER", "teacher", {
+            path: "/",
+          });
+          window.location.href = "/home";
+        });
         setSignupData({
           firstName: "",
           lastName: "",
@@ -60,7 +71,7 @@ function TeacherSignup() {
         });
         setConfirmPassword("");
         setError("");
-        window.location.href = "/teacher-login";
+        window.location.href = "/home";
       } catch (err) {
         console.log(err.response.data);
         if (err.response.data.name === "ValidationError") {
@@ -69,8 +80,8 @@ function TeacherSignup() {
         }
       }
     } else {
-      setError("Passwords doesn't match");
-      throw new Error(`Passwords doesn't match`);
+      setError("Passwords does not match");
+      throw new Error(`Passwords does not match`);
     }
   };
 
@@ -230,7 +241,7 @@ function TeacherSignup() {
             }}
           />
           <Slabel htmlFor="gender">
-            Gender <br /> (used to set up avatar) :{" "}
+            Gender :
           </Slabel>
           <SSelect
             value={signupData.gender}
@@ -316,13 +327,6 @@ const SInput = styled.input`
 `;
 const Slabel = styled.label`
   margin-bottom: 0.3rem;
-`;
-const Checboxcontainer = styled.div`
-  display: flex;
-  margin-bottom: 1rem;
-  label {
-    width: 14rem;
-  }
 `;
 
 const ErrorText = styled.p`

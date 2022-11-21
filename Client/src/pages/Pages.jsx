@@ -7,6 +7,7 @@ import TeacherLogin from "./TeacherLogin";
 import Home from "./Home";
 import LoggedHome from "./LoggedHome";
 import StudentEdit from "./StudentEdit";
+import TeacherEdit from './TeacherEdit'
 import ProtectedRoute from "../components/ProtectedRoutes";
 
 function Pages() {
@@ -22,6 +23,9 @@ function Pages() {
       </Route>
       <Route exact path="/student-edit" element={<ProtectedRoute />}>
         <Route path="/student-edit" element={<StudentEdit />} />
+      </Route>
+      <Route exact path="/teacher-edit" element={<ProtectedRoute />}>
+        <Route path="/teacher-edit" element={<TeacherEdit />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
