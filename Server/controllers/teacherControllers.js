@@ -1,5 +1,6 @@
 const Teacher = require("../models/teacherModel");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const signup = async (req, res, next) => {
   const teacher = new Teacher({
@@ -17,7 +18,17 @@ const signup = async (req, res, next) => {
   });
   try {
     await teacher.save();
-    res.status(201).send({ success: true, data: teacher });
+    const key = process.env.PRIVATE_KEY;
+
+    const token = jwt.sign(
+      {
+        teacherId: teacher._id,
+        teacherEmail: teacher.email,
+      },
+      key,
+      { expiresIn: "24h" }
+    );
+    res.status(201).send({ success: true, data: teacher, token });
   } catch (err) {
     res.status(400).send(err);
   }
@@ -73,6 +84,7 @@ const getSingleTeacher = async (req, res) => {
 
 const updateTeacher = async (req, res) => {
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 12)
     const updatedTeacher = await Teacher.updateOne(
       { _id: req.params.teacherID },
       {
@@ -80,7 +92,7 @@ const updateTeacher = async (req, res) => {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
-          password: req.body.password,
+          password: hashedPassword,
           subjects: req.body.subjects,
           availableDays: req.body.availableDays,
           gender: req.body.gender,
