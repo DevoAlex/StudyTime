@@ -11,7 +11,7 @@ import {
 } from "react-icons/ai";
 import Cookies from "universal-cookie";
 import StudentImg from "../images/student.png";
-import TeacherImg from "../images/teacher.png";
+import TeacherImg from "../images/teacher-not-set.png";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
