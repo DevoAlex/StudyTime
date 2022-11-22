@@ -11,7 +11,7 @@ import {
 } from "react-icons/ai";
 import Cookies from "universal-cookie";
 import StudentImg from "../images/student.png";
-import TeacherImg from "../images/teacher-not-set.png";
+import TeacherImg from "../images/teacher-icon.png";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +58,9 @@ function Nav() {
           )}
           {user === "teacher" ? (
             <AvatarContainer>
+            <div>
               <Avatar src={TeacherImg} />
+              </div>
             </AvatarContainer>
           ) : (
             ""

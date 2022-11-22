@@ -273,7 +273,6 @@ function TeacherSignup() {
             options={availableOptions}
             value={signupData.availableFor}
             onChange={(e) => {
-              console.log(e);
               setSignupData({
                 ...signupData,
                 availableFor: e,
