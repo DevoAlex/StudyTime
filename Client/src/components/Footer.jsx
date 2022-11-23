@@ -35,6 +35,7 @@ const Wrapper = styled.div`
   background-color: #2d323e;
   gap: 1rem;
   text-align: center;
+  margin-top: 1rem;
   padding-top: 2rem;
   padding-bottom: 1rem;
   color: white;

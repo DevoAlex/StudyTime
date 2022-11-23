@@ -9,7 +9,6 @@ function Home() {
   const cookies = new Cookies();
 
   const isLogin = cookies.get("TOKEN");
-  const user = cookies.get("USER");
 
   return (
     <Container>
@@ -27,7 +26,7 @@ function Home() {
         </h1>
       </HeroContainer>
       <LinkContainer>
-        {isLogin && user === "student" ? (
+        {isLogin ? (
           <Link to="/home">
             <LinkButton>Student</LinkButton>
           </Link>
@@ -36,10 +35,15 @@ function Home() {
             <LinkButton>Student</LinkButton>
           </Link>
         )}
-
-        <Link to="/teacher-login">
-          <LinkButton>Teacher</LinkButton>
-        </Link>
+        {isLogin ? (
+          <Link to="/home">
+            <LinkButton>Teacher</LinkButton>
+          </Link>
+        ) : (
+          <Link to="/teacher-login">
+            <LinkButton>Teacher</LinkButton>
+          </Link>
+        )}        
       </LinkContainer>
     </Container>
   );

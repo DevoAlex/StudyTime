@@ -56,7 +56,7 @@ function StudentUpdate() {
     }
     setTimeout(() => {
       setIsLoading(false);
-    }, 50);
+    }, 500);
   };
 
   const handleSubmit = async (e) => {

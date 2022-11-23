@@ -39,13 +39,19 @@ function Nav() {
         </Decoration>
         <Container>
           <Logo src={LogoImage} />
-          <Slink to="/">
-            <Title>Study Time</Title>
-          </Slink>
+          {isLogin ? (
+            <Slink to="/home">
+              <Title>Study Time</Title>
+            </Slink>
+          ) : (
+            <Slink to="/">
+              <Title>Study Time</Title>
+            </Slink>
+          )}
         </Container>
-        <Link to="#">
+        <Slink to="#">
           <SettingsImg src={settingsImage} onClick={showUserSettings} />
-        </Link>
+        </Slink>
       </Navbar>
       {isOpen ? (
         <UserBar isOpen={isOpen} onClick={showUserSettings}>
@@ -58,8 +64,8 @@ function Nav() {
           )}
           {user === "teacher" ? (
             <AvatarContainer>
-            <div>
-              <Avatar src={TeacherImg} />
+              <div>
+                <Avatar src={TeacherImg} />
               </div>
             </AvatarContainer>
           ) : (
@@ -98,6 +104,7 @@ function Nav() {
                 <AiOutlineLogout style={{ height: "1rem", width: "1rem" }} />
                 <p>Logout</p>
               </LogoutBtn>
+              
             </>
           ) : (
             ""
@@ -133,7 +140,7 @@ const Logo = styled.img`
 const SettingsImg = styled.img`
   height: 2rem;
   width: 2rem;
-  margin-top: 1rem;
+  
   position: relative;
   margin-right: 1rem;
   cursor: pointer;

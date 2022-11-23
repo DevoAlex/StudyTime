@@ -36,6 +36,7 @@ function StudentSignup() {
           cookies.set("TOKEN", res.data.token, {
             path: "/",
           });
+          
           cookies.set("USER", "student", {
             path: "/",
           });
