@@ -17,7 +17,7 @@ const postReview = async (req, res) => {
           rating: req.body.rating,
           content: req.body.content,
         });
-        const savedReview = review.save();
+        const savedReview = await review.save();
         res.status(201).json({ data: savedReview });
       }
     } catch (err) {
