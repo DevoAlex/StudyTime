@@ -13,3 +13,5 @@ router.post("/api", postReview);
 router.get("/api/:teacherID", getReview);
 
 router.delete("/:reviewID", deleteReview);
+
+module.exports = router;
