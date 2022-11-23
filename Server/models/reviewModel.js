@@ -16,7 +16,7 @@ const reviewSchema = new mongoose.Schema(
     rating: {
       type: String,
       validate(value) {
-        if (!validator.isNumber(value)) {
+        if (!validator.isNumeric(value)) {
           throw new Error("Rating must contain only number");
         }
       },
