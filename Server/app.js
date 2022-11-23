@@ -9,6 +9,7 @@ const app = express();
 //Import routes
 const studentRoutes = require("./routes/studentRoutes");
 const teacherRoutes = require("./routes/teacherRoutes");
+const reviewRoutes = require('./routes/reviewsRoutes')
 
 //Middlewares
 app.use(bodyParser.urlencoded({extended: true}))
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(helmet());
 app.use("/students", studentRoutes);
 app.use("/teachers", teacherRoutes);
+app.use('/reviews', reviewRoutes)
 
 app.use((req, res, next) => {
   res.header ('Access-Control-Allow-Origin', '*');

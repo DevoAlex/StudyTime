@@ -13,6 +13,7 @@ function Searched() {
   let params = useParams();
 
   const getSearched = async (teacherID) => {
+    setIsLoading(true);
     try {
       await axios
         .get(`https://study-time-api.herokuapp.com/teachers/api/${teacherID}`)
@@ -22,6 +23,9 @@ function Searched() {
     } catch (err) {
       console.log(err);
     }
+    setTimeout(() => {
+        setIsLoading(false);
+      }, 250);
   };
 
   useEffect(() => {
@@ -30,7 +34,11 @@ function Searched() {
   }, []);
 
   return (
-    <Wrapper>
+    <>
+    {isLoading ? (
+        <LoadingSpinner />
+    ) : (
+        <Wrapper>
       {teacher.gender === "man" ? (
         <UserImage src={TeacherManImg} alt="Teacher man image" />
       ) : (
@@ -54,24 +62,27 @@ function Searched() {
       <Price>€ Price / Hour : {teacher.pricePerHour}</Price>
       <ListLabel>📚 Subjects :</ListLabel>
       <SUnordList>
-        {teacher.subjects.map((item) => {
+        {teacher?.subjects?.map((item) => {
           return <SListItem key={item.value}>{item.label}</SListItem>;
         })}
       </SUnordList>
       <ListLabel>📎  Available for :</ListLabel>
       <SUnordList>
-        {teacher.availableFor.map((item) => {
+        {teacher?.availableFor?.map((item) => {
           return <SListItem key={item.value}>{item.label}</SListItem>;
         })}
       </SUnordList>
       <ListLabel>🗓  Available Days :</ListLabel>
       <SUnordList>
-        {teacher.availableDays.map((item) => {
+        {teacher?.availableDays?.map((item) => {
           return <SListItem key={item.value}>{item.label}</SListItem>;
         })}
       </SUnordList>
-      
+      <MailButton href={`mailto:${teacher.email}?subject=Help me from Study Time&body=Hi! I have seen your Study Time profile, I need help with my studies, can you help me? `}>Click to send mail</MailButton>
     </Wrapper>
+    )}
+    
+    </>
   );
 }
 
@@ -119,6 +130,26 @@ const ListLabel = styled.h4`
 const Price = styled.p`
     align-self: flex-start;
     margin-left: 2rem;
+`
+const MailButton = styled.a`
+margin-top: 1rem;
+margin-bottom: 1rem;
+    color: black;
+    text-decoration: none;
+    padding: 0.7rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-radius: 0.5rem;
+    background-color: #87cefa;
+    font-family: "Comfortaa";
+  cursor: pointer;
+  transition: transform 0.2s;
+  :hover {
+    transform: scale(1.13, 1.13);
+  }
+  :active {
+    background-color: #79b9e1;
+  }
 `
 
 export default Searched;

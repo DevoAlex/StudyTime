@@ -46,7 +46,7 @@ function LoggedHome() {
     fetchTeachers();
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 250);
   }, []);
 
   return (
@@ -73,7 +73,7 @@ function LoggedHome() {
             <option value="physical education">Physical Education</option>
             <option value="geometry">Geometry</option>
           </SSelect>
-          <SButton onClick={teacherSubjectFilter}>teacher</SButton>
+          <SButton onClick={teacherSubjectFilter}>Filter</SButton>
           {teachers.map((item) => {
             return (
               <Slink to={"/searched/" + item._id} key={item._id}>

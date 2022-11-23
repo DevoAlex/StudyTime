@@ -105,7 +105,7 @@ function TeacherUpdate() {
     }
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 250);
   };
 
   const handleSubmit = async (e) => {
@@ -180,7 +180,7 @@ function TeacherUpdate() {
                 type="text"
                 id="firstName"
                 name="firstName"
-                value={signupData.firstName}
+                value={signupData?.firstName}
                 onChange={(e) => {
                   setSignupData({
                     ...signupData,
@@ -193,7 +193,7 @@ function TeacherUpdate() {
                 type="text"
                 id="lastName"
                 name="lastName"
-                value={signupData.lastName}
+                value={signupData?.lastName}
                 onChange={(e) => {
                   setSignupData({
                     ...signupData,
@@ -206,7 +206,7 @@ function TeacherUpdate() {
                 type="email"
                 id="email"
                 name="email"
-                value={signupData.email}
+                value={signupData?.email}
                 onChange={(e) => {
                   setSignupData({
                     ...signupData,
