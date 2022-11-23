@@ -6,6 +6,7 @@ const {
     deleteReview
 } = require('../controllers/reviewControllers')
 
+router.options('/api', cors())
 router.post("/api", postReview);
 
 router.get("/api/:teacherID", getReview);
