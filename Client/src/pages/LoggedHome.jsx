@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
+import {device} from '../components/device'
 import TeacherManImg from "../images/man-icon.png";
 import TeacherWomanImg from "../images/woman-icon.png";
 import TeacherNotSetImg from "../images/teacher-not-set.png";
@@ -142,10 +143,18 @@ const Card = styled.div`
   width: 18rem;
   min-height: 10rem;
   border-radius: 0.8rem;
-
   margin-top: 1rem;
   margin-bottom: 1rem;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgb(0, 0, 0, 0.4) 0px 15px 12px;
+  @media ${device.tablet} {
+    width: 30rem;
+  }
+  @media ${device.laptop} {
+    width: 40rem;
+  }
+  @media ${device.laptopL} {
+    width: 50rem;
+  }
 `;
 
 const UserImage = styled.img`
@@ -155,17 +164,45 @@ const UserImage = styled.img`
   position: relative;
   padding: 1rem;
   align-self: center;
+  @media ${device.tablet} {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  @media ${device.laptop} {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  @media ${device.laptopL} {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
 `;
 const RightInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
   width: 100%;
+  @media ${device.tablet} {
+    margin-left: -3rem;
+  }
+  @media ${device.laptop} {
+    font-size: 1.1rem;
+  }
+  @media ${device.laptopL} {
+    margin-left: -5rem;
+  }
 `;
 const SUnordList = styled.ul`
   min-width: 8rem;
   margin-top: -0.6rem;
+  @media ${device.tablet} {
+    margin-left: 4rem;
+    margin-bottom: 1rem;
+    li {
+      margin-top: 0.2rem;
+    }
+  }
+
 `;
 const Name = styled.h3`
   font-family: "Lora";
@@ -176,6 +213,26 @@ const LeftInfoWrapper = styled.div`
   p {
     margin-left: 1rem;
     width: 6rem;
+  }
+  @media ${device.tablet} {
+    margin-left: 1.5rem;
+    p{
+      margin-left: 1.5rem;
+      margin-top: 0.3rem;
+    }
+  }
+  @media ${device.laptop} {
+    margin-left: 2.5rem;
+    p{
+      font-size: 1.1rem;
+    }
+  }
+  @media ${device.laptopL} {
+    margin-left: 7rem;
+    p{
+      font-size: 1.3rem;
+      margin-left: 1rem;
+    }
   }
 `;
 const SSelect = styled.select`

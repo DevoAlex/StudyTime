@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
 import backgroundImage from "../images/bg-image.jpg";
+import Modal from 'react-modal'
+import {device} from '../components/device'
 
 function Home() {
+  const [modalOpen, setModalOpen] = useState(true)
   const cookies = new Cookies();
 
   const isLogin = cookies.get("TOKEN");
+
+
+
+  const customModal = {
+    content: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      height: '15rem',
+      top: '25%',
+      backgroundColor: '#2d323e',
+      color:'white',
+      borderRadius:'0.5rem',
+      textAlign: 'center',
+    }
+  }
 
   return (
     <Container>
@@ -20,6 +39,15 @@ function Home() {
           content="Study Time helps you find someone who assists you to prepare your next exam or do your homeworks. "
         />
       </Helmet>
+      <Modal 
+          isOpen={modalOpen} 
+          ariaHideApp={false}
+          style={customModal}
+        >
+        <CookieTitle>Cookie consent</CookieTitle>
+        <p>This site uses cookies for functionality purposes only</p>
+        <CookieButton onClick={() => setModalOpen(false)}><strong>Accept</strong></CookieButton>
+      </Modal>
       <HeroContainer>
         <h1>
           Find the help you need with your exam preparation or your homeworks
@@ -50,11 +78,17 @@ function Home() {
 }
 
 const Container = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
   background: url(${backgroundImage});
   background-size: cover;
   min-height: 30rem;
   background-position: center;
   margin-bottom: 2rem;
+  @media ${device.laptop} {
+    background-position: bottom;
+  }
 `;
 const LinkButton = styled.button`
   text-decoration: none;
@@ -73,15 +107,34 @@ const LinkButton = styled.button`
   :active {
     background-color: #79b9e1;
   }
+  @media ${device.tablet} {
+    width: 9rem;
+    height: 2.3rem;
+    font-size: 1rem;
+  }
+  @media ${device.laptopL} {
+    width: 10rem;
+    height: 2.3rem;
+    font-size: 1rem;
+  }
 `;
 const HeroContainer = styled.div`
   width: 16rem;
   font-family: "Federo", system-ui, -apple-system, "Segoe UI", "Open Sans",
     sans-serif;
-  margin-left: 2rem;
   margin-top: 3rem;
   text-align: center;
   color: #5d5d5d;
+  @media ${device.tablet} {
+    margin-top: 2rem;
+    width: 22rem;
+    font-size: 1.2rem;
+  }
+  @media ${device.laptopL} {
+    margin-top: 3rem;
+    width: 30rem;
+    font-size: 1.3rem;
+  }
 `;
 const LinkContainer = styled.div`
   display: flex;
@@ -90,6 +143,48 @@ const LinkContainer = styled.div`
   margin-left: 2rem;
   margin-right: 2rem;
   padding-bottom: 2rem;
+  gap: 2rem;
+  @media ${device.tablet} {
+    gap: 10rem;
+  }
+  @media ${device.laptopL} {
+    margin-top: 3rem;
+  }
 `;
+const CookieTitle = styled.h2`
+  color: #79b9e1;
+  font-family: 'Lora';
+  letter-spacing: 0.1rem;
+  @media ${device.tablet} {
+    font-size: 1.8rem;
+  }
+  @media ${device.laptopL} {
+    font-size: 2.3rem;
+  }
+`
+const CookieButton = styled.button`
+  height: 2rem;
+  width: 10rem;
+  margin-top: 2rem;
+  background-color: #79b9e1;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  transition: transform 0.2s;
+  :hover {
+    transform: scale(1.13, 1.13);
+  }
+  :active {
+    background-color: #79b9e1;
+  }
+  @media ${device.tablet} {
+    font-size: 1rem;
+  }
+  @media ${device.laptop} {
+    font-size: 1.2rem;
+    width: 12rem;
+    height: 2.3rem;
+  }
+`
 
 export default Home;
