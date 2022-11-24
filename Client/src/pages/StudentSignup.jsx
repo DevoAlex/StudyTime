@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
+import { device } from "../components/device";
 
 function StudentSignup() {
   const [signupData, setSignupData] = useState({
@@ -36,7 +37,7 @@ function StudentSignup() {
           cookies.set("TOKEN", res.data.token, {
             path: "/",
           });
-          
+
           cookies.set("USER", "student", {
             path: "/",
           });
@@ -151,6 +152,7 @@ function StudentSignup() {
 
 const Main = styled.main`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -162,14 +164,25 @@ const SForm = styled.form`
   font-size: 1.1rem;
   justify-content: center;
   h1 {
-    padding-left: 3rem;
+    font-size: 2rem;
     width: 13rem;
     font-family: "Comfortaa";
+    text-align: center;
   }
   h4 {
     width: 16rem;
     color: #5d5d5d;
     margin-top: 1.2rem;
+  }
+  @media ${device.laptop} {
+    width: 25rem;
+    h1 {
+      width: 25rem;
+    }
+    h4 {
+      width: 25rem;
+      text-align: center;
+    }
   }
 `;
 
@@ -180,6 +193,9 @@ const SInput = styled.input`
   text-indent: 0.3rem;
   border-radius: 0.3rem;
   border: 0.1rem solid grey;
+  @media ${device.laptop} {
+    height: 2rem;
+  }
 `;
 const Slabel = styled.label`
   margin-bottom: 0.3rem;
@@ -188,6 +204,9 @@ const Slabel = styled.label`
 const ErrorText = styled.p`
   color: red;
   font-size: 0.9rem;
+  @media ${device.laptop} {
+    font-size: 1.1rem;
+  }
 `;
 const SButton = styled.button`
   border-radius: 0.3rem;
@@ -205,6 +224,10 @@ const SButton = styled.button`
   }
   :active {
     background-color: #79b9e1;
+  }
+  @media ${device.laptop} {
+    width: 22rem;
+    font-size: 1.1rem;
   }
 `;
 const SLink = styled(Link)`

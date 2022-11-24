@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
+import { device } from "../components/device";
 
 function StudentLogin() {
   const [loginData, setLoginData] = useState({
@@ -103,6 +104,9 @@ const Main = styled.main`
   justify-content: center;
   align-items: center;
   min-height: 33rem;
+  @media ${device.laptop} {
+    min-height: 40rem;
+  }
 `;
 const SForm = styled.form`
   display: flex;
@@ -112,9 +116,15 @@ const SForm = styled.form`
   font-size: 1.1rem;
   justify-content: center;
   h1 {
-    padding-left: 3rem;
     width: 18rem;
     font-family: "Comfortaa";
+  }
+  @media ${device.laptop} {
+    width: 25rem;
+    h1 {
+      width: 25rem;
+      text-align: center;
+    }
   }
 `;
 const Title = styled.h1`
@@ -127,14 +137,19 @@ const SInput = styled.input`
   text-indent: 0.3rem;
   border-radius: 0.3rem;
   border: 0.1rem solid grey;
+  @media ${device.laptop} {
+    height: 2rem;
+  }
 `;
 const Slabel = styled.label`
   margin-bottom: 0.3rem;
 `;
 const ErrorText = styled.p`
-  font-family: "Comfortaa";
   color: red;
   font-size: 0.9rem;
+  @media ${device.laptop} {
+    font-size: 1.1rem;
+  }
 `;
 const SButton = styled.button`
   border-radius: 0.3rem;
@@ -153,6 +168,10 @@ const SButton = styled.button`
   }
   :active {
     background-color: #79b9e1;
+  }
+  @media ${device.laptop} {
+    width: 22rem;
+    font-size: 1.1rem;
   }
 `;
 const SLink = styled(Link)`

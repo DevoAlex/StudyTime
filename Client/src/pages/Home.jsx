@@ -4,30 +4,28 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
 import backgroundImage from "../images/bg-image.jpg";
-import Modal from 'react-modal'
-import {device} from '../components/device'
+import Modal from "react-modal";
+import { device } from "../components/device";
 
 function Home() {
-  const [modalOpen, setModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(true);
   const cookies = new Cookies();
 
   const isLogin = cookies.get("TOKEN");
 
-
-
   const customModal = {
     content: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      height: '15rem',
-      top: '25%',
-      backgroundColor: '#2d323e',
-      color:'white',
-      borderRadius:'0.5rem',
-      textAlign: 'center',
-    }
-  }
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      height: "15rem",
+      top: "25%",
+      backgroundColor: "#2d323e",
+      color: "white",
+      borderRadius: "0.5rem",
+      textAlign: "center",
+    },
+  };
 
   return (
     <Container>
@@ -39,14 +37,12 @@ function Home() {
           content="Study Time helps you find someone who assists you to prepare your next exam or do your homeworks. "
         />
       </Helmet>
-      <Modal 
-          isOpen={modalOpen} 
-          ariaHideApp={false}
-          style={customModal}
-        >
+      <Modal isOpen={modalOpen} ariaHideApp={false} style={customModal}>
         <CookieTitle>Cookie consent</CookieTitle>
         <p>This site uses cookies for functionality purposes only</p>
-        <CookieButton onClick={() => setModalOpen(false)}><strong>Accept</strong></CookieButton>
+        <CookieButton onClick={() => setModalOpen(false)}>
+          <strong>Accept</strong>
+        </CookieButton>
       </Modal>
       <HeroContainer>
         <h1>
@@ -71,16 +67,16 @@ function Home() {
           <Link to="/teacher-login">
             <LinkButton>Teacher</LinkButton>
           </Link>
-        )}        
+        )}
       </LinkContainer>
     </Container>
   );
 }
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: url(${backgroundImage});
   background-size: cover;
   min-height: 30rem;
@@ -88,6 +84,7 @@ align-items: center;
   margin-bottom: 2rem;
   @media ${device.laptop} {
     background-position: bottom;
+    min-height: 40rem;
   }
 `;
 const LinkButton = styled.button`
@@ -147,13 +144,16 @@ const LinkContainer = styled.div`
   @media ${device.tablet} {
     gap: 10rem;
   }
+  @media ${device.laptop} {
+    margin-top: 6rem;
+  }
   @media ${device.laptopL} {
-    margin-top: 3rem;
+    margin-top: 9rem;
   }
 `;
 const CookieTitle = styled.h2`
   color: #79b9e1;
-  font-family: 'Lora';
+  font-family: "Lora";
   letter-spacing: 0.1rem;
   @media ${device.tablet} {
     font-size: 1.8rem;
@@ -161,7 +161,7 @@ const CookieTitle = styled.h2`
   @media ${device.laptopL} {
     font-size: 2.3rem;
   }
-`
+`;
 const CookieButton = styled.button`
   height: 2rem;
   width: 10rem;
@@ -185,6 +185,6 @@ const CookieButton = styled.button`
     width: 12rem;
     height: 2.3rem;
   }
-`
+`;
 
 export default Home;

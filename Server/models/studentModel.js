@@ -35,7 +35,7 @@ const studentSchema = new mongoose.Schema(
       validate(value) {
         if (!validator.isStrongPassword(value)) {
           throw new Error(
-            "Password must be minimum 8 charachters and must contain one uppercase letter, one number and one symbol"
+            "Password must be minimum 8 characters and must contain one uppercase letter, one number and one symbol"
           );
         }
       },

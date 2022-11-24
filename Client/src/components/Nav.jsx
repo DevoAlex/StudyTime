@@ -105,7 +105,6 @@ function Nav() {
                 <AiOutlineLogout style={{ height: "1rem", width: "1rem" }} />
                 <p>Logout</p>
               </LogoutBtn>
-              
             </>
           ) : (
             ""
@@ -144,7 +143,7 @@ const Logo = styled.img`
 const SettingsImg = styled.img`
   height: 2rem;
   width: 2rem;
-  
+
   position: relative;
   margin-right: 1rem;
   cursor: pointer;
@@ -172,7 +171,7 @@ const Decoration = styled.div`
   }
   @media ${device.laptop} {
     width: 13rem;
-    div{
+    div {
       width: 6.5rem;
     }
   }
@@ -222,28 +221,28 @@ const UserBar = styled.div`
   @media ${device.tablet} {
     width: 14rem;
     @keyframes showSideBar {
-    from {
-      opacity: 0;
-      width: 0rem;
+      from {
+        opacity: 0;
+        width: 0rem;
+      }
+      to {
+        opacity: 1;
+        width: 14rem;
+      }
     }
-    to {
-      opacity: 1;
-      width: 14rem;
-    }
-  }
   }
   @media ${device.laptopL} {
     width: 20rem;
     @keyframes showSideBar {
-    from {
-      opacity: 0;
-      width: 0rem;
+      from {
+        opacity: 0;
+        width: 0rem;
+      }
+      to {
+        opacity: 1;
+        width: 20rem;
+      }
     }
-    to {
-      opacity: 1;
-      width: 20rem;
-    }
-  }
   }
 `;
 
@@ -293,7 +292,6 @@ const Avatar = styled.img`
     height: 5rem;
     width: 5rem;
   }
-  
 `;
 
 export default Nav;

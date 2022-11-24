@@ -7,7 +7,7 @@ import TeacherLogin from "./TeacherLogin";
 import Home from "./Home";
 import LoggedHome from "./LoggedHome";
 import StudentEdit from "./StudentEdit";
-import TeacherEdit from './TeacherEdit';
+import TeacherEdit from "./TeacherEdit";
 import Searched from "./Searched";
 import ProtectedRoute from "../components/ProtectedRoutes";
 

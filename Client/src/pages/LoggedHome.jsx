@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
-import {device} from '../components/device'
+import { device } from "../components/device";
 import TeacherManImg from "../images/man-icon.png";
 import TeacherWomanImg from "../images/woman-icon.png";
 import TeacherNotSetImg from "../images/teacher-not-set.png";
@@ -202,7 +202,6 @@ const SUnordList = styled.ul`
       margin-top: 0.2rem;
     }
   }
-
 `;
 const Name = styled.h3`
   font-family: "Lora";
@@ -216,20 +215,20 @@ const LeftInfoWrapper = styled.div`
   }
   @media ${device.tablet} {
     margin-left: 1.5rem;
-    p{
+    p {
       margin-left: 1.5rem;
       margin-top: 0.3rem;
     }
   }
   @media ${device.laptop} {
     margin-left: 2.5rem;
-    p{
+    p {
       font-size: 1.1rem;
     }
   }
   @media ${device.laptopL} {
     margin-left: 7rem;
-    p{
+    p {
       font-size: 1.3rem;
       margin-left: 1rem;
     }
@@ -246,11 +245,20 @@ const SSelect = styled.select`
   border: 0.1rem solid grey;
   margin-bottom: 1rem;
   font-family: "Montserrat";
+  @media ${device.laptopL} {
+    width: 25rem;
+    height: 2.5rem;
+  }
 `;
 const Slabel = styled.p`
-  margin-top: 1rem;
+  width: 18rem;
+  margin-top: 1.5rem;
   margin-bottom: -1rem;
   font-family: "Comfortaa";
+  @media ${device.laptopL} {
+    font-size: 1.2rem;
+    width: 25rem;
+  }
 `;
 const SButton = styled.button`
   border-radius: 0.3rem;
@@ -269,6 +277,11 @@ const SButton = styled.button`
   }
   :active {
     background-color: #79b9e1;
+  }
+  @media ${device.laptopL} {
+    width: 20rem;
+    height: 2.2rem;
+    font-size: 1.1rem;
   }
 `;
 

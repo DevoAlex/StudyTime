@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { device } from "../components/device";
 import { AiOutlineDelete } from "react-icons/ai";
 
 function StudentUpdate() {
@@ -61,7 +62,26 @@ function StudentUpdate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (signupData.password === confirmPassword) {
+    if (
+      signupData.password !== confirmPassword ||
+      signupData.password.length <= 7
+    ) {
+      setError(
+        "Passwords doesn't match and Password must be minimum 8 characters and must contain one uppercase letter, one number and one symbol"
+      );
+      throw new Error(
+        `Passwords doesn't match and Password must be minimum 8 characters and must contain one uppercase letter, one number and one symbol`
+      );
+    } else if (signupData.firstName === "") {
+      setError("First name field must be filled");
+      throw new Error(`First name field must be filled`);
+    } else if (signupData.lastName === "") {
+      setError("Last name field must be filled");
+      throw new Error(`Last name field must be filled`);
+    } else if (signupData.email === "") {
+      setError("Email field must be filled");
+      throw new Error(`Email field must be filled`);
+    } else {
       try {
         await axios(editConfiguration).then((res) => console.log(res));
         setSignupData({
@@ -82,9 +102,6 @@ function StudentUpdate() {
           console.log(error);
         }
       }
-    } else {
-      setError("Passwords doesn't match");
-      throw new Error(`Passwords doesn't match`);
     }
   };
 
@@ -103,6 +120,7 @@ function StudentUpdate() {
   useEffect(() => {
     getUserID();
     getUserData();
+    console.log(signupData);
   }, []);
 
   return (
@@ -119,6 +137,9 @@ function StudentUpdate() {
             <SForm onSubmit={handleSubmit}>
               <h1>Account edit 📝</h1>
               <h4>Edit the fields that you want to modify!</h4>
+              <EditButton type="button" onClick={getUserData}>
+                Pre-set your current datas
+              </EditButton>
               <Slabel htmlFor="firstName">First name : </Slabel>
               <SInput
                 type="text"
@@ -209,6 +230,7 @@ const SForm = styled.form`
   justify-content: center;
   h1 {
     font-size: 2rem;
+    text-align: center;
     width: 16rem;
     font-family: "Comfortaa";
   }
@@ -216,6 +238,16 @@ const SForm = styled.form`
     width: 16rem;
     color: #5d5d5d;
     margin-top: 0.7rem;
+  }
+  @media ${device.laptop} {
+    width: 25rem;
+    h1 {
+      width: 25rem;
+    }
+    h4 {
+      width: 25rem;
+      text-align: center;
+    }
   }
 `;
 
@@ -226,6 +258,9 @@ const SInput = styled.input`
   text-indent: 0.3rem;
   border-radius: 0.3rem;
   border: 0.1rem solid grey;
+  @media ${device.laptop} {
+    height: 2rem;
+  }
 `;
 const Slabel = styled.label`
   margin-bottom: 0.3rem;
@@ -234,6 +269,9 @@ const Slabel = styled.label`
 const ErrorText = styled.p`
   color: red;
   font-size: 0.9rem;
+  @media ${device.laptop} {
+    font-size: 1.1rem;
+  }
 `;
 const EditButton = styled.button`
   border-radius: 0.3rem;
@@ -252,6 +290,10 @@ const EditButton = styled.button`
   }
   :active {
     background-color: #79b9e1;
+  }
+  @media ${device.laptop} {
+    width: 22rem;
+    font-size: 1.1rem;
   }
 `;
 const DeleteButton = styled.button`
@@ -277,6 +319,10 @@ const DeleteButton = styled.button`
   }
   :active {
     background-color: #880808;
+  }
+  @media ${device.laptop} {
+    width: 22rem;
+    font-size: 1.1rem;
   }
 `;
 
