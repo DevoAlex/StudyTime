@@ -164,6 +164,11 @@ function Searched() {
             </div>
           </InfoWrapper>
           <SForm>
+          <MailButton
+            href={`mailto:${teacher.email}?subject=Help me from Study Time&body=Hi! I have seen your Study Time profile. Can you help me with my studies? `}
+          >
+            Contact
+          </MailButton>
             <ReviewsLabel>⭐️ Reviews</ReviewsLabel>
             <Slabel htmlFor="rating">Rating : </Slabel>
             <SInput
@@ -235,11 +240,6 @@ function Searched() {
               </ReviewWrapper>
             );
           })}
-          <MailButton
-            href={`mailto:${teacher.email}?subject=Help me from Study Time&body=Hi! I have seen your Study Time profile. Can you help me with my studies? `}
-          >
-            Contact
-          </MailButton>
         </Wrapper>
       )}
     </>
@@ -371,7 +371,7 @@ const MailButton = styled.a`
   padding: 0.5rem;
   padding-left: 5rem;
   padding-right: 5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   background-color: #87cefa;
   font-family: "Comfortaa";
   cursor: pointer;
@@ -383,12 +383,18 @@ const MailButton = styled.a`
     background-color: #79b9e1;
   }
   @media ${device.tablet} {
-    padding-left: 7rem;
-    padding-right: 7rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
   @media ${device.laptopL} {
-    padding-left: 10rem;
-    padding-right: 10rem;
+    width: 22rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    align-self: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     font-size: 1.2rem;
@@ -464,11 +470,13 @@ const SButton = styled.button`
   @media ${device.tablet} {
     width: 20rem;
     font-size: 1rem;
+    margin-bottom: 3rem;
   }
   @media ${device.laptopL} {
     font-size: 1.2rem;
     width: 23rem;
     height: 2.5rem;
+    margin-bottom: 5rem;
   }
 `;
 const ReviewsLabel = styled.h4`
