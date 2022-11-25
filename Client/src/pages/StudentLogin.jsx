@@ -36,7 +36,7 @@ function StudentLogin() {
         cookies.set("USER", "student", {
           path: "/",
         });
-        navigate("/home");
+        navigate("/home", {replace: true});
       });
       setLoginData({
         email: "",

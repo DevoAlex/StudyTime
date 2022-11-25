@@ -43,7 +43,7 @@ function StudentSignup() {
           cookies.set("USER", "student", {
             path: "/",
           });
-          navigate("/home");
+          navigate("/home", {replace: true});
         });
         setSignupData({
           firstName: "",

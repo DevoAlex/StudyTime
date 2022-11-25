@@ -37,7 +37,7 @@ function TeacherLogin() {
         cookies.set("USER", "teacher", {
           path: "/",
         });
-        navigate("/home");
+        navigate("/home", {replace: true});
       });
       setLoginData({
         email: "",

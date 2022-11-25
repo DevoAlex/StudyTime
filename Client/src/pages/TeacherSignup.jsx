@@ -57,7 +57,7 @@ function TeacherSignup() {
           cookies.set("USER", "teacher", {
             path: "/",
           });
-          navigate("/home");
+          navigate("/home", {replace: true});
         });
         setSignupData({
           firstName: "",
