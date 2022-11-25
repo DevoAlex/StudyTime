@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
 import { device } from "../components/device";
@@ -14,6 +14,8 @@ function StudentLogin() {
   const [error, setError] = useState(false);
 
   const cookies = new Cookies();
+
+  const navigate = useNavigate()
 
   const configuration = {
     method: "post",
@@ -34,7 +36,7 @@ function StudentLogin() {
         cookies.set("USER", "student", {
           path: "/",
         });
-        window.location.href = "/home";
+        navigate('/home')
       });
       setLoginData({
         email: "",
