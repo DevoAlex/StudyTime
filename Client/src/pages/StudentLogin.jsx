@@ -15,7 +15,7 @@ function StudentLogin() {
 
   const cookies = new Cookies();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const configuration = {
     method: "post",
@@ -36,7 +36,7 @@ function StudentLogin() {
         cookies.set("USER", "student", {
           path: "/",
         });
-        navigate('/home')
+        navigate("/home");
       });
       setLoginData({
         email: "",

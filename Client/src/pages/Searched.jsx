@@ -10,7 +10,7 @@ import TeacherManImg from "../images/man-icon.png";
 import TeacherWomanImg from "../images/woman-icon.png";
 import TeacherNotSetImg from "../images/teacher-not-set.png";
 import StudentImg from "../images/student.png";
-import {AiOutlineDelete} from 'react-icons/ai'
+import { AiOutlineDelete } from "react-icons/ai";
 
 function Searched() {
   const [teacher, setTeacher] = useState([]);
@@ -93,7 +93,7 @@ function Searched() {
             content: "",
             rating: "",
           });
-          window.location.reload()
+          window.location.reload();
         }
       } catch (err) {
         console.log(err);
@@ -210,7 +210,7 @@ function Searched() {
 
             const handleDelete = async () => {
               await axios(deleteConfig).then((res) => console.log(res));
-              window.location.reload()
+              window.location.reload();
             };
             return (
               <ReviewWrapper key={review._id}>
@@ -223,12 +223,12 @@ function Searched() {
                     <p>Reviewed on {review.createdAt.slice(0, 10)}</p>
                   </div>
                   {userID === review?.student._id ? (
-                  <button onClick={handleDelete}>
-                    <AiOutlineDelete />
-                  </button>
-                ) : (
-                  ""
-                )}
+                    <button onClick={handleDelete}>
+                      <AiOutlineDelete />
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </AvatarWrapper>
                 <StarsWrapper>{stars}</StarsWrapper>
                 <ReviewContent>{review.content}</ReviewContent>
@@ -524,13 +524,13 @@ const ReviewWrapper = styled.div`
   text-align: left;
   button {
     margin-left: 5rem;
-  color: red;
-  background-color: transparent;
-  height: 2rem;
-  width: 2rem;
-  font-size: 1.5rem;
-  border: none;
-  margin-top: 1rem;
+    color: red;
+    background-color: transparent;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.5rem;
+    border: none;
+    margin-top: 1rem;
   }
   @media ${device.tablet} {
     width: 25rem;
@@ -584,7 +584,6 @@ const ErrorText = styled.p`
   @media ${device.laptopL} {
     font-size: 1.3rem;
   }
-`
-
+`;
 
 export default Searched;

@@ -8,6 +8,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { device } from "../components/device";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MultiSelect } from "react-multi-select-component";
+import { useNavigate } from "react-router-dom";
 
 function TeacherUpdate() {
   const [signupData, setSignupData] = useState({
@@ -29,6 +30,8 @@ function TeacherUpdate() {
   const [teacherID, setTeacherID] = useState("");
 
   const cookies = new Cookies();
+
+  const navigate = useNavigate();
 
   const subjectSelectOptions = [
     { label: "History", value: "history" },
@@ -150,7 +153,7 @@ function TeacherUpdate() {
         setError("");
         cookies.remove("TOKEN", { path: "/" });
         cookies.remove("USER", { path: "/" });
-        window.location.href = "/teacher-login";
+        navigate("/teacher-login");
       } catch (err) {
         console.log(err);
         if (err.response.data.name === "ValidationError") {
@@ -176,7 +179,7 @@ function TeacherUpdate() {
   useEffect(() => {
     getTeacherID();
     getUserData();
-    console.log(signupData.subjects)
+    console.log(signupData.subjects);
   }, []);
 
   return (

@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { device } from "../components/device";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function StudentUpdate() {
   const [signupData, setSignupData] = useState({
@@ -21,6 +22,8 @@ function StudentUpdate() {
   const [userID, setUserID] = useState("");
 
   const cookies = new Cookies();
+
+  const navigate = useNavigate();
 
   const getUserID = () => {
     const cookie = cookies.get("TOKEN");
@@ -94,7 +97,7 @@ function StudentUpdate() {
         setError("");
         cookies.remove("TOKEN", { path: "/" });
         cookies.remove("USER", { path: "/" });
-        window.location.href = "/student-login";
+        navigate("/student-login");
       } catch (err) {
         console.log(err);
         if (err.response.data.name === "ValidationError") {

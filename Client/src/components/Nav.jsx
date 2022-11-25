@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LogoImage from "../images/logo.png";
 import settingsImage from "../images/settings.png";
@@ -19,6 +19,8 @@ function Nav() {
 
   const cookies = new Cookies();
 
+  const navigate = useNavigate();
+
   const showUserSettings = () => {
     setIsOpen(!isOpen);
   };
@@ -29,7 +31,7 @@ function Nav() {
   const logout = () => {
     cookies.remove("TOKEN", { path: "/" });
     cookies.remove("USER", { path: "/" });
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (
