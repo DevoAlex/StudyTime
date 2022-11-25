@@ -121,13 +121,13 @@ function TeacherUpdate() {
       throw new Error(
         `Passwords doesn't match and Password must be minimum 8 characters and must contain one uppercase letter, one number and one symbol`
       );
-    } else if (signupData.availableDays === []) {
+    } else if (signupData.availableDays.length === 0) {
       setError("Available days field must be filled");
       throw new Error(`Available days field must be filled`);
-    } else if (signupData.subjects === []) {
+    } else if (signupData.subjects.length === 0) {
       setError("Subjects field must be filled");
       throw new Error(`Subjects field must be filled`);
-    } else if (signupData.availableFor === []) {
+    } else if (signupData.availableFor.length === 0) {
       setError("Available for field must be filled");
       throw new Error(`Available for field must be filled`);
     } else {
@@ -176,6 +176,7 @@ function TeacherUpdate() {
   useEffect(() => {
     getTeacherID();
     getUserData();
+    console.log(signupData.subjects)
   }, []);
 
   return (
