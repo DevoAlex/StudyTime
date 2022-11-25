@@ -5,6 +5,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
+import { Helmet } from "react-helmet";
 import { device } from "../components/device";
 import TeacherManImg from "../images/man-icon.png";
 import TeacherWomanImg from "../images/woman-icon.png";
@@ -112,6 +113,17 @@ function Searched() {
 
   return (
     <>
+      <Helmet>
+        <title>Teacher Page - Study Time</title>
+        <meta
+          name="keywords"
+          content="teacher, professor, tutor, study, homeworks, study, exam"
+        />
+        <meta
+          name="description"
+          content="Find out what subjects i can teach you and when i'm available!"
+        />
+      </Helmet>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
@@ -164,11 +176,11 @@ function Searched() {
             </div>
           </InfoWrapper>
           <SForm>
-          <MailButton
-            href={`mailto:${teacher.email}?subject=Help me from Study Time&body=Hi! I have seen your Study Time profile. Can you help me with my studies? `}
-          >
-            Contact
-          </MailButton>
+            <MailButton
+              href={`mailto:${teacher.email}?subject=Help me from Study Time&body=Hi! I have seen your Study Time profile. Can you help me with my studies? `}
+            >
+              Contact
+            </MailButton>
             <ReviewsLabel>⭐️ Reviews</ReviewsLabel>
             <Slabel htmlFor="rating">Rating : </Slabel>
             <SInput

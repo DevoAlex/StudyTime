@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { device } from "../components/device";
 import TeacherManImg from "../images/man-icon.png";
 import TeacherWomanImg from "../images/woman-icon.png";
@@ -52,7 +53,14 @@ function LoggedHome() {
 
   return (
     <>
-      {" "}
+      <Helmet>
+        <title>Home - Study Time</title>
+        <meta name="keywords" content="study, exam, homeworks, test, home" />
+        <meta
+          name="description"
+          content="Home - Study Time helps you find someone who assists you to prepare your next exam or do your homeworks. "
+        />
+      </Helmet>{" "}
       {isLoading ? (
         <LoadingSpinner />
       ) : (
