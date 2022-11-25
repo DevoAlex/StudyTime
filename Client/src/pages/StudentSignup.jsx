@@ -155,6 +155,9 @@ const Main = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media ${device.laptopL} {
+    min-height: 50rem;
+  }
 `;
 const SForm = styled.form`
   display: flex;

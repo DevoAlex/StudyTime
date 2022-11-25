@@ -108,6 +108,9 @@ const Main = styled.main`
   @media ${device.laptop} {
     min-height: 40rem;
   }
+  @media ${device.laptopL} {
+    min-height: 50rem;
+  }
 `;
 const SForm = styled.form`
   display: flex;

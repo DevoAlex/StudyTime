@@ -86,6 +86,10 @@ const Container = styled.div`
     background-position: bottom;
     min-height: 40rem;
   }
+  @media ${device.laptop} {
+    background-position: bottom;
+    min-height: 50rem;
+  }
 `;
 const LinkButton = styled.button`
   text-decoration: none;
