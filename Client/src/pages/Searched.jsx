@@ -236,7 +236,7 @@ function Searched() {
             );
           })}
           <MailButton
-            href={`mailto:${teacher.email}?subject=Help me from Study Time&body=Hi! I have seen your Study Time profile, I need help with my studies, can you help me? `}
+            href={`mailto:${teacher.email}?subject=Help me from Study Time&body=Hi! I have seen your Study Time profile. Can you help me with my studies? `}
           >
             Contact
           </MailButton>
