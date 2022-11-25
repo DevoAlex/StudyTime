@@ -26,7 +26,7 @@ function TeacherSignup() {
 
   const cookies = new Cookies();
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const configuration = {
     method: "post",
@@ -74,7 +74,6 @@ function TeacherSignup() {
         });
         setConfirmPassword("");
         setError("");
-        window.location.href = "/home";
       } catch (err) {
         console.log(err.response.data);
         if (err.response.data.name === "ValidationError") {
