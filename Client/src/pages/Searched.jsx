@@ -222,7 +222,7 @@ function Searched() {
             }
             const deleteConfig = {
               method: "delete",
-              url: `https://study-time-api.herokuapp.com/reviews/${review._id}`,
+              url: `https://study-time.onrender.com/reviews/${review._id}`,
             };
 
             const handleDelete = async () => {
