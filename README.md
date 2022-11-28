@@ -35,7 +35,7 @@ Teachers can register to the site to get hired and teach the subjects they know,
 
 ## :zap: Try it!
 
-If you want to find a teacher who can help you or want to get hired for helping others study or do their homeworks try [StudyTime!](#)
+If you want to find a teacher who can help you or want to get hired for helping others study or do their homeworks try [StudyTime!](https://studytimes.netlify.app/)
  
 ## :page_with_curl: License
 
