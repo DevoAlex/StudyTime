@@ -17,7 +17,7 @@ function LoggedHome() {
   const fetchTeachers = async () => {
     try {
       await axios
-        .get("https://study-time-api.herokuapp.com/teachers/api")
+        .get("https://study-time.onrender.com/teachers/api")
         .then((res) => {
           const data = res.data.data;
           setTeachers(data);

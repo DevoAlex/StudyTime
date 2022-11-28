@@ -30,7 +30,7 @@ function TeacherSignup() {
 
   const configuration = {
     method: "post",
-    url: "https://study-time-api.herokuapp.com/teachers/signup",
+    url: "https://study-time.onrender.com/teachers/signup",
     data: {
       firstName: signupData.firstName,
       lastName: signupData.lastName,

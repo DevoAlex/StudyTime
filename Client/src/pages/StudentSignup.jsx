@@ -22,7 +22,7 @@ function StudentSignup() {
 
   const configuration = {
     method: "post",
-    url: "https://study-time-api.herokuapp.com/students/signup",
+    url: "https://study-time.onrender.com/students/signup",
     data: {
       firstName: signupData.firstName,
       lastName: signupData.lastName,

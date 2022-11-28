@@ -41,7 +41,7 @@ function Searched() {
     setIsLoading(true);
     try {
       await axios
-        .get(`https://study-time-api.herokuapp.com/teachers/api/${teacherID}`)
+        .get(`https://study-time.onrender.com/teachers/api/${teacherID}`)
         .then((res) => {
           setTeacher(res.data.data);
         });

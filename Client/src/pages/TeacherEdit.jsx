@@ -68,7 +68,7 @@ function TeacherUpdate() {
 
   const editConfiguration = {
     method: "patch",
-    url: `https://study-time-api.herokuapp.com/teachers/${teacherID}`,
+    url: `https://study-time.onrender.com/teachers/${teacherID}`,
     data: {
       firstName: signupData.firstName,
       lastName: signupData.lastName,
@@ -88,7 +88,7 @@ function TeacherUpdate() {
     setIsLoading(true);
     try {
       await axios
-        .get(`https://study-time-api.herokuapp.com/teachers/api/${teacherID}`)
+        .get(`https://study-time.onrender.com/teachers/api/${teacherID}`)
         .then((res) => {
           setSignupData({
             firstName: res.data.data.firstName,
@@ -166,7 +166,7 @@ function TeacherUpdate() {
 
   const deleteConfig = {
     method: "delete",
-    url: `https://study-time-api.herokuapp.com/teachers/${teacherID}`,
+    url: `https://study-time.onrender.com/teachers/${teacherID}`,
   };
 
   const handleDelete = async () => {

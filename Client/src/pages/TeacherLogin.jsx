@@ -19,7 +19,7 @@ function TeacherLogin() {
 
   const configuration = {
     method: "post",
-    url: "https://study-time-api.herokuapp.com/teachers/login",
+    url: "https://study-time.onrender.com/teachers/login",
     data: {
       email: loginData.email,
       password: loginData.password,
