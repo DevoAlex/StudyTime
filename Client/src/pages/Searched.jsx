@@ -56,7 +56,7 @@ function Searched() {
   const fetchReviews = async (teacherID) => {
     try {
       await axios
-        .get(`https://study-time-api.herokuapp.com/reviews/api/${teacherID}`)
+        .get(`https://study-time.onrender.com/reviews/api/${teacherID}`)
         .then((res) => {
           setReviews(res.data.data);
         });
@@ -67,7 +67,7 @@ function Searched() {
 
   const configuration = {
     method: "post",
-    url: `https://study-time-api.herokuapp.com/reviews/api/`,
+    url: `https://study-time.onrender.com/reviews/api/`,
     data: {
       student: reviewForm.student,
       teacher: reviewForm.teacher,
