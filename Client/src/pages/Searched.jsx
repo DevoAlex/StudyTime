@@ -90,6 +90,7 @@ function Searched() {
             await axios(configuration).then((res) => {
               console.log(res);
             });
+            setIsError('')
             setReviewForm({
               content: "",
               rating: "",
