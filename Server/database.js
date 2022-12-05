@@ -13,7 +13,7 @@ const connect = async () => {
       uri = mongoMock.getUri();
     }
     const connected = await mongoose.connect(uri, {
-      dbName: "StudyTimeAPI",
+      dbName: process.env.DB_NAME,
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
