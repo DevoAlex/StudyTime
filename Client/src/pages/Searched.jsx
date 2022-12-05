@@ -218,50 +218,51 @@ function Searched() {
             </SButton>
           </SForm>
           <Subtitle>Other students reviews</Subtitle>
-          {reviews?.map((review) => {
-            let stars = [];
-            for (let i = 0; i < review.rating; i++) {
-              stars.push(<p key={i}>⭐️</p>);
-            }
-            const deleteConfig = {
-              method: "delete",
-              url: `https://study-time.onrender.com/reviews/${review._id}`,
-            };
-
-            const handleDelete = async () => {
-              try {
-                await axios(deleteConfig).then((res) => console.log(res));
-                fetchReviews(params.search);
-              } catch (err) {
-                console.log(err);
-              }
-            };
-            return (
-              <ReviewWrapper key={review._id}>
-                <AvatarWrapper>
-                  <Avatar src={StudentImg} alt="Student image" />
-                  <div>
-                    <h4>
-                      {review.student.firstName} {review.student.lastName}
-                    </h4>
-                    <p>Reviewed on {review.createdAt.slice(0, 10)}</p>
-                  </div>
-                  {userID === review?.student._id ? (
-                    <button onClick={handleDelete}>
-                      <AiOutlineDelete />
-                    </button>
-                  ) : (
-                    ""¯
-                  )}
-                </AvatarWrapper>
-                <StarsWrapper>{stars}</StarsWrapper>
-                <ReviewContent>{review.content}</ReviewContent>
-              </ReviewWrapper>
-            );
-          })}
-          { fetchError ? (
+          {fetchError ? (
             <p>{fetchError}</p>
-          ) : ( '' )}
+          ) : (
+            reviews.map((review) => {
+              let stars = [];
+              for (let i = 0; i < review.rating; i++) {
+                stars.push(<p key={i}>⭐️</p>);
+              }
+              const deleteConfig = {
+                method: "delete",
+                url: `https://study-time.onrender.com/reviews/${review._id}`,
+              };
+
+              const handleDelete = async () => {
+                try {
+                  await axios(deleteConfig).then((res) => console.log(res));
+                  fetchReviews(params.search);
+                } catch (err) {
+                  console.log(err);
+                }
+              };
+              return (
+                <ReviewWrapper key={review._id}>
+                  <AvatarWrapper>
+                    <Avatar src={StudentImg} alt="Student image" />
+                    <div>
+                      <h4>
+                        {review.student.firstName} {review.student.lastName}
+                      </h4>
+                      <p>Reviewed on {review.createdAt.slice(0, 10)}</p>
+                    </div>
+                    {userID === review?.student._id ? (
+                      <button onClick={handleDelete}>
+                        <AiOutlineDelete />
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </AvatarWrapper>
+                  <StarsWrapper>{stars}</StarsWrapper>
+                  <ReviewContent>{review.content}</ReviewContent>
+                </ReviewWrapper>
+              );
+            })
+          )}
         </Wrapper>
       )}
     </>

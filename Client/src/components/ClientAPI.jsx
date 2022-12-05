@@ -103,6 +103,7 @@ export const useFetchSearched = () => {
           .get(`https://study-time.onrender.com/reviews/api/${teacherID}`)
           .then((res) => {
             setReviews(res.data.data);
+            setFetchError(false)
           });
       } catch (err) {
         console.log(err);
