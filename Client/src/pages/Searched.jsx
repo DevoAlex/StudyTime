@@ -38,7 +38,7 @@ import {
 import { useFetchSearched } from "../components/ClientAPI";
 
 function Searched() {
-  const { teacher, reviews, isLoading, fetchReviews, getSearched } =
+  const { teacher, reviews, isLoading, fetchReviews, getSearched, fetchError } =
     useFetchSearched();
 
   const [userID, setUserID] = useState("");
@@ -229,8 +229,12 @@ function Searched() {
             };
 
             const handleDelete = async () => {
-              await axios(deleteConfig).then((res) => console.log(res));
-              fetchReviews(params.search);
+              try {
+                await axios(deleteConfig).then((res) => console.log(res));
+                fetchReviews(params.search);
+              } catch (err) {
+                console.log(err);
+              }
             };
             return (
               <ReviewWrapper key={review._id}>
@@ -247,7 +251,7 @@ function Searched() {
                       <AiOutlineDelete />
                     </button>
                   ) : (
-                    ""
+                    ""¯
                   )}
                 </AvatarWrapper>
                 <StarsWrapper>{stars}</StarsWrapper>
@@ -255,6 +259,9 @@ function Searched() {
               </ReviewWrapper>
             );
           })}
+          { fetchError ? (
+            <p>{fetchError}</p>
+          ) : ( '' )}
         </Wrapper>
       )}
     </>

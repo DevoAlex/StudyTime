@@ -34,7 +34,7 @@ const postReview = async (req, res) => {
         return res
           .status(404)
           .json({
-            error: `No review for the teacher with ID ${req.params.teacherID}`,
+            error: `No reviews for this teacher yet.`,
           });
       }
       res.status(200).json({ data: filteredReviews });

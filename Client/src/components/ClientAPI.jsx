@@ -69,6 +69,7 @@ export const useFetchSearched = () => {
   const [teacher, setTeacher] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [fetchError, setFetchError] = useState("");
 
   const cookies = new Cookies();
   const token = cookies.get("TOKEN");
@@ -105,11 +106,12 @@ export const useFetchSearched = () => {
           });
       } catch (err) {
         console.log(err);
+        setFetchError(err.response.data.error);
       }
     } else {
       throw new Error("Login needed to load reviews");
     }
   };
 
-  return { teacher, reviews, isLoading, fetchReviews, getSearched };
+  return { teacher, reviews, isLoading, fetchReviews, getSearched, fetchError };
 };
