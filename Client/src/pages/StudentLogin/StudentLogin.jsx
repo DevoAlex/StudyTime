@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import {
   Main,
   SForm,
@@ -14,9 +14,9 @@ import {
   SButton,
   SLink,
   SlinkText,
-} from "./TeacherLogin.style";
+} from "./StudentLogin.style";
 
-function TeacherLogin() {
+function StudentLogin() {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -24,13 +24,13 @@ function TeacherLogin() {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
-
   const cookies = new Cookies();
+
+  const navigate = useNavigate();
 
   const configuration = {
     method: "post",
-    url: "https://study-time.onrender.com/teachers/login",
+    url: process.env.REACT_APP_LOGIN_STUDENTS,
     data: {
       email: loginData.email,
       password: loginData.password,
@@ -45,8 +45,7 @@ function TeacherLogin() {
         cookies.set("TOKEN", res.data.token, {
           path: "/",
         });
-
-        cookies.set("USER", "teacher", {
+        cookies.set("USER", "student", {
           path: "/",
         });
         navigate("/home", { replace: true });
@@ -66,17 +65,17 @@ function TeacherLogin() {
   return (
     <>
       <Helmet>
-        <title>Teacher Login - Study Time</title>
+        <title>Student Login - Study Time</title>
         <meta
           name="description"
-          content="Get hired and help students prepare their next exam or do their homeworks. "
+          content="Login to Study Time to find someone who helps you to prepare your next exam or do your homeworks. "
         />
       </Helmet>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <Main>
-          <Title>Teacher Login 🧑‍🏫</Title>
+          <Title>Student Login 🧑‍🎓</Title>
           <SForm>
             <Slabel htmlFor="email">Email : </Slabel>
             <SInput
@@ -110,7 +109,7 @@ function TeacherLogin() {
             </SButton>
             <SlinkText>
               You don't have an account yet?{" "}
-              <SLink to="/teacher-signup">Get started!</SLink>
+              <SLink to="/student-signup">Get started!</SLink>
             </SlinkText>
           </SForm>
         </Main>
@@ -119,4 +118,4 @@ function TeacherLogin() {
   );
 }
 
-export default TeacherLogin;
+export default StudentLogin;

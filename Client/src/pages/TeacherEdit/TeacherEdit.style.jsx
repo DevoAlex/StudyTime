@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../components/device";
+import { device } from "../../components/device";
 import { MultiSelect } from "react-multi-select-component";
 
 export const Main = styled.main`

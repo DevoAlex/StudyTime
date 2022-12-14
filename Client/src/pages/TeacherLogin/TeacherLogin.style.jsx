@@ -1,11 +1,19 @@
 import styled from "styled-components";
-import { device } from "../components/device";
+import { device } from "../../components/device";
+import { Link } from "react-router-dom";
 
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 33rem;
+  @media ${device.laptop} {
+    min-height: 40rem;
+  }
+  @media ${device.laptopL} {
+    min-height: 50rem;
+  }
 `;
 export const SForm = styled.form`
   display: flex;
@@ -15,15 +23,9 @@ export const SForm = styled.form`
   font-size: 1.1rem;
   justify-content: center;
   h1 {
-    font-size: 2rem;
     text-align: center;
-    width: 16rem;
+    width: 18rem;
     font-family: "Comfortaa";
-  }
-  h4 {
-    width: 16rem;
-    color: #5d5d5d;
-    margin-top: 0.7rem;
   }
   @media ${device.laptop} {
     width: 25rem;
@@ -36,7 +38,9 @@ export const SForm = styled.form`
     }
   }
 `;
-
+export const Title = styled.h1`
+  font-family: "Comfortaa";
+`;
 export const SInput = styled.input`
   font-size: 0.9rem;
   height: 1.5rem;
@@ -51,24 +55,24 @@ export const SInput = styled.input`
 export const Slabel = styled.label`
   margin-bottom: 0.3rem;
 `;
-
 export const ErrorText = styled.p`
+  font-family: "Comfortaa";
   color: red;
   font-size: 0.9rem;
   @media ${device.laptop} {
     font-size: 1.1rem;
   }
 `;
-export const EditButton = styled.button`
+export const SButton = styled.button`
   border-radius: 0.3rem;
   height: 2rem;
   width: 16rem;
   align-self: center;
   margin-top: 1rem;
-  margin-bottom: 1rem;
   border: none;
   background-color: #87cefa;
   font-family: "Comfortaa";
+  color: #5d5d5d;
   cursor: pointer;
   transition: transform 0.2s;
   :hover {
@@ -82,32 +86,12 @@ export const EditButton = styled.button`
     font-size: 1.1rem;
   }
 `;
-export const DeleteButton = styled.button`
-  border-radius: 0.3rem;
-  height: 2rem;
-  width: 16rem;
-  align-self: center;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  border: none;
-  background-color: #ee4b2b;
-  font-family: "Comfortaa";
-  cursor: pointer;
-  transition: transform 0.2s;
-  svg {
-    height: 1rem;
-    width: 1rem;
-    margin-bottom: -0.2rem;
-    margin-left: 0.3rem;
-  }
-  :hover {
-    transform: scale(1.13, 1.13);
-  }
-  :active {
-    background-color: #880808;
-  }
-  @media ${device.laptop} {
-    width: 22rem;
-    font-size: 1.1rem;
-  }
+export const SLink = styled(Link)`
+  text-decoration: none;
+  color: #79b9e1;
+`;
+export const SlinkText = styled.p`
+  width: 18rem;
+  color: #5d5d5d;
+  margin-top: 2rem;
 `;

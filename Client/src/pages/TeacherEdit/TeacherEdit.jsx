@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import {
@@ -78,7 +78,7 @@ function TeacherUpdate() {
 
   const editConfiguration = {
     method: "patch",
-    url: `https://study-time.onrender.com/teachers/${teacherID}`,
+    url: `${process.env.REACT_APP_MODIFY_TEACHERS}${teacherID}`,
     data: {
       firstName: signupData.firstName,
       lastName: signupData.lastName,
@@ -99,7 +99,7 @@ function TeacherUpdate() {
       setIsLoading(true);
       try {
         await axios
-          .get(`https://study-time.onrender.com/teachers/api/${teacherID}`)
+          .get(`${process.env.REACT_APP_FETCH_TEACHERS}/${teacherID}`)
           .then((res) => {
             setSignupData({
               firstName: res.data.data.firstName,
@@ -185,7 +185,7 @@ function TeacherUpdate() {
 
   const deleteConfig = {
     method: "delete",
-    url: `https://study-time.onrender.com/teachers/${teacherID}`,
+    url: `${process.env.REACT_APP_MODIFY_TEACHERS}${teacherID}`,
   };
 
   const handleDelete = async () => {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../components/device";
+import { device } from "../../components/device";
 import { Link } from "react-router-dom";
 
 export const Wrapper = styled.div`
@@ -137,29 +137,5 @@ export const Slabel = styled.p`
   @media ${device.laptopL} {
     font-size: 1.2rem;
     width: 25rem;
-  }
-`;
-export const SButton = styled.button`
-  border-radius: 0.3rem;
-  margin-bottom: 0.7rem;
-  margin-top: 0.7rem;
-  height: 2rem;
-  width: 16rem;
-  align-self: center;
-  border: none;
-  background-color: #87cefa;
-  font-family: "Comfortaa";
-  cursor: pointer;
-  transition: transform 0.2s;
-  :hover {
-    transform: scale(1.13, 1.13);
-  }
-  :active {
-    background-color: #79b9e1;
-  }
-  @media ${device.laptopL} {
-    width: 20rem;
-    height: 2.2rem;
-    font-size: 1.1rem;
   }
 `;

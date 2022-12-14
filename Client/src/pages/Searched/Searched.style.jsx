@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../components/device";
+import { device } from "../../components/device";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -348,3 +348,7 @@ export const ErrorText = styled.p`
     font-size: 1.3rem;
   }
 `;
+
+export const Sbutton = styled.button`
+cursor: pointer;
+`

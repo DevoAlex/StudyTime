@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { useParams, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
 import { Helmet } from "react-helmet";
-import TeacherManImg from "../images/man-icon.png";
-import TeacherWomanImg from "../images/woman-icon.png";
-import TeacherNotSetImg from "../images/teacher-not-set.png";
-import StudentImg from "../images/student.png";
+import TeacherManImg from "../../images/man-icon.png";
+import TeacherWomanImg from "../../images/woman-icon.png";
+import TeacherNotSetImg from "../../images/teacher-not-set.png";
+import StudentImg from "../../images/student.png";
 import { AiOutlineDelete } from "react-icons/ai";
 import {
   Wrapper,
@@ -34,8 +34,9 @@ import {
   StarsWrapper,
   ReviewContent,
   ErrorText,
+  Sbutton
 } from "./Searched.style";
-import { useFetchSearched } from "../components/ClientAPI";
+import { useFetchSearched } from "../../components/ClientAPI";
 
 function Searched() {
   const { teacher, reviews, isLoading, fetchReviews, getSearched, fetchError } =
@@ -66,7 +67,7 @@ function Searched() {
 
   const configuration = {
     method: "post",
-    url: `https://study-time.onrender.com/reviews/api/`,
+    url: `${process.env.REACT_APP_FETCH_REVIEWS}`,
     data: {
       student: reviewForm.student,
       teacher: reviewForm.teacher,
@@ -229,7 +230,7 @@ function Searched() {
               }
               const deleteConfig = {
                 method: "delete",
-                url: `https://study-time.onrender.com/reviews/${review._id}`,
+                url: `${process.env.REACT_APP_DELETE_REVIEWS}${review._id}`,
               };
 
               const handleDelete = async () => {
@@ -251,9 +252,9 @@ function Searched() {
                       <p>Reviewed on {review.createdAt.slice(0, 10)}</p>
                     </div>
                     {userID === review?.student._id ? (
-                      <button onClick={handleDelete}>
+                      <Sbutton onClick={handleDelete}>
                         <AiOutlineDelete />
-                      </button>
+                      </Sbutton>
                     ) : (
                       ""
                     )}

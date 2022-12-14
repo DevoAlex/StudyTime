@@ -1,8 +1,8 @@
 import React from "react";
 import { Wrapper, SocialWrapper } from "./Footer.style";
-import linkedinIcon from "../images/linkedin.png";
-import instagramIcon from "../images/instagram.png";
-import githubIcon from "../images/github.png";
+import linkedinIcon from "../../images/linkedin.png";
+import instagramIcon from "../../images/instagram.png";
+import githubIcon from "../../images/github.png";
 
 function footer() {
   return (

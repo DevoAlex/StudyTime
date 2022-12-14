@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import {
@@ -41,7 +41,7 @@ function StudentUpdate() {
 
   const editConfiguration = {
     method: "patch",
-    url: `https://study-time.onrender.com/students/${userID}`,
+    url: `${process.env.REACT_APP_MODIFY_STUDENTS}${userID}`,
     data: {
       firstName: signupData.firstName,
       lastName: signupData.lastName,
@@ -55,7 +55,7 @@ function StudentUpdate() {
       setIsLoading(true);
       try {
         await axios
-          .get(`https://study-time.onrender.com/students/api/${userID}`)
+          .get(`${process.env.REACT_APP_FETCH_STUDENTS}${userID}`)
           .then((res) => {
             setSignupData({
               firstName: res.data.data.firstName,
@@ -66,7 +66,9 @@ function StudentUpdate() {
           });
       } catch (err) {
         console.log(err);
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 250);
       }
       setTimeout(() => {
         setIsLoading(false);
@@ -127,7 +129,7 @@ function StudentUpdate() {
 
   const deleteConfig = {
     method: "delete",
-    url: `https://study-time.onrender.com/students/${userID}`,
+    url: `${process.env.REACT_APP_MODIFY_STUDENTS}${userID}`,
   };
 
   const handleDelete = async () => {
@@ -139,9 +141,11 @@ function StudentUpdate() {
 
   useEffect(() => {
     getUserID();
-    getUserData();
-    console.log(signupData);
   }, []);
+
+  useEffect(() => {
+    getUserData();
+  }, [userID]);
 
   return (
     <>
@@ -157,9 +161,9 @@ function StudentUpdate() {
             <SForm onSubmit={handleSubmit}>
               <h1>Account edit 📝</h1>
               <h4>Edit the fields that you want to modify!</h4>
-              <EditButton type="button" onClick={getUserData}>
+              {/* <EditButton type="button" onClick={getUserData}>
                 Pre-set your current datas
-              </EditButton>
+              </EditButton> */}
               <Slabel htmlFor="firstName">First name : </Slabel>
               <SInput
                 type="text"

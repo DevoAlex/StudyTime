@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { device } from "../components/device";
-import backgroundImage from "../images/bg-image.jpg";
+import { device } from "../../components/device";
+import backgroundImage from "../../images/bg-image.jpg";
 
 export const Container = styled.div`
   display: flex;

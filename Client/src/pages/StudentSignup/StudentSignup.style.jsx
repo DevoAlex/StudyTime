@@ -1,12 +1,15 @@
 import styled from "styled-components";
-import { device } from "../components/device";
-import { MultiSelect } from "react-multi-select-component";
+import { device } from "../../components/device";
 import { Link } from "react-router-dom";
 
 export const Main = styled.main`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media ${device.laptopL} {
+    min-height: 50rem;
+  }
 `;
 export const SForm = styled.form`
   display: flex;
@@ -16,9 +19,10 @@ export const SForm = styled.form`
   font-size: 1.1rem;
   justify-content: center;
   h1 {
-    text-align: center;
+    font-size: 2rem;
     width: 13rem;
     font-family: "Comfortaa";
+    text-align: center;
   }
   h4 {
     width: 16rem;
@@ -89,35 +93,4 @@ export const SlinkText = styled.p`
   width: 18rem;
   color: #5d5d5d;
   margin-top: 2rem;
-`;
-export const SSelect = styled.select`
-  height: 2rem;
-  font-size: 0.9rem;
-  text-indent: 0.3rem;
-  border-radius: 0.3rem;
-  border: 0.1rem solid grey;
-  margin-bottom: 1rem;
-  font-family: "Montserrat";
-  @media ${device.laptop} {
-    height: 2.5rem;
-  }
-`;
-export const STextArea = styled.textarea`
-  resize: none;
-  height: 5rem;
-  border-radius: 0.3rem;
-  border: 0.1rem solid grey;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  font-family: "Montserrat";
-  @media ${device.laptop} {
-    height: 9rem;
-  }
-`;
-export const SMultiSelect = styled(MultiSelect)`
-  font-size: 0.9rem;
-  text-indent: 0.3rem;
-  border-radius: 0.3rem;
-  border: 0.1rem solid grey;
-  margin-bottom: 1rem;
 `;

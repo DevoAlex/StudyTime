@@ -1,7 +1,7 @@
 import React from "react";
 import Pages from "./pages/Pages";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import Nav from "./components/Nav/Nav";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (

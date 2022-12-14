@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import StudentSignup from "./StudentSignup";
-import StudentLogin from "./StudentLogin";
-import TeacherSignup from "./TeacherSignup";
-import TeacherLogin from "./TeacherLogin";
-import Home from "./Home";
-import LoggedHome from "./LoggedHome";
-import StudentEdit from "./StudentEdit";
-import TeacherEdit from "./TeacherEdit";
-import Searched from "./Searched";
+import StudentSignup from "./StudentSignup/StudentSignup";
+import StudentLogin from "./StudentLogin/StudentLogin";
+import TeacherSignup from "./TeacherSignup/TeacherSignup";
+import TeacherLogin from "./TeacherLogin/TeacherLogin";
+import Home from "./Home/Home";
+import LoggedHome from "./LoggedHome/LoggedHome";
+import StudentEdit from "./StudentEdit/StudentEdit";
+import TeacherEdit from "./TeacherEdit/TeacherEdit";
+import Searched from "./Searched/Searched";
 import ProtectedRoute from "../components/ProtectedRoutes";
 
 function Pages() {

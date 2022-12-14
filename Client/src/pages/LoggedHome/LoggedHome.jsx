@@ -1,9 +1,9 @@
 import React from "react";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { Helmet } from "react-helmet";
-import TeacherManImg from "../images/man-icon.png";
-import TeacherWomanImg from "../images/woman-icon.png";
-import TeacherNotSetImg from "../images/teacher-not-set.png";
+import TeacherManImg from "../../images/man-icon.png";
+import TeacherWomanImg from "../../images/woman-icon.png";
+import TeacherNotSetImg from "../../images/teacher-not-set.png";
 import {
   Wrapper,
   Slink,
@@ -15,17 +15,15 @@ import {
   LeftInfoWrapper,
   SSelect,
   Slabel,
-  SButton,
 } from "./LoggedHome.style";
-import { useFetchTeachers } from "../components/ClientAPI";
+import { useFetchTeachers } from "../../components/ClientAPI";
 
 function LoggedHome() {
   const {
     isLoading,
-    teachers,
-    teacherSubjectFilter,
     subjectFilter,
     setSubjectFilter,
+    filteredTeachers
   } = useFetchTeachers();
 
   return (
@@ -59,8 +57,7 @@ function LoggedHome() {
             <option value="physical education">Physical Education</option>
             <option value="geometry">Geometry</option>
           </SSelect>
-          <SButton onClick={teacherSubjectFilter}>Filter</SButton>
-          {teachers.map((item) => {
+          {filteredTeachers.map((item) => {
             return (
               <Slink to={"/searched/" + item._id} key={item._id}>
                 <Card key={item._id}>
@@ -101,7 +98,8 @@ function LoggedHome() {
                 </Card>
               </Slink>
             );
-          })}
+          })
+          }
         </Wrapper>
       )}
     </>

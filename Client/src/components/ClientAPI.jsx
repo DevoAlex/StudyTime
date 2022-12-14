@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export const useFetchTeachers = () => {
   const [teachers, setTeachers] = useState([]);
+  const [filteredTeachers, setFilteredTeachers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [subjectFilter, setSubjectFilter] = useState("DEFAULT");
 
@@ -17,10 +18,11 @@ export const useFetchTeachers = () => {
     if (token) {
       try {
         await axios
-          .get("https://study-time.onrender.com/teachers/api")
+          .get(process.env.REACT_APP_FETCH_TEACHERS)
           .then((res) => {
             const data = res.data.data;
             setTeachers(data);
+            setFilteredTeachers(data)
           });
       } catch (err) {
         console.log(err);
@@ -34,17 +36,18 @@ export const useFetchTeachers = () => {
   const teacherSubjectFilter = () => {
     const filterString = subjectFilter.toString();
     if (filterString !== "DEFAULT") {
-      const filteredTeachers = teachers.filter((teacher) => {
-        const prova = teacher.subjects;
-        return prova.some((item) => item.value === filterString);
+      const filter = teachers.filter((teacher) => {
+        const subj = teacher.subjects;
+        return subj.some((item) => item.value === filterString);
       });
-      setTeachers(filteredTeachers);
+      setFilteredTeachers(filter);
+    }else{
+    setFilteredTeachers(teachers)
     }
-    return;
   };
 
   useEffect(() => {
-    fetchTeachers();
+    teacherSubjectFilter()
   }, [subjectFilter]);
 
   useEffect(() => {
@@ -56,12 +59,11 @@ export const useFetchTeachers = () => {
   }, []);
 
   return {
-    teacherSubjectFilter,
     fetchTeachers,
     isLoading,
-    teachers,
     subjectFilter,
     setSubjectFilter,
+    filteredTeachers
   };
 };
 
@@ -80,7 +82,7 @@ export const useFetchSearched = () => {
       setIsLoading(true);
       try {
         await axios
-          .get(`https://study-time.onrender.com/teachers/api/${teacherID}`)
+          .get(`${process.env.REACT_APP_FETCH_TEACHERS}/${teacherID}`)
           .then((res) => {
             setTeacher(res.data.data);
           });
@@ -100,7 +102,7 @@ export const useFetchSearched = () => {
     if (token) {
       try {
         await axios
-          .get(`https://study-time.onrender.com/reviews/api/${teacherID}`)
+          .get(`${process.env.REACT_APP_FETCH_REVIEWS}${teacherID}`)
           .then((res) => {
             setReviews(res.data.data);
             setFetchError(false)

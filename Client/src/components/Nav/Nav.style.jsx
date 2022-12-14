@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "./device";
+import { device } from "../device";
 import { Link } from "react-router-dom";
 
 export const Navbar = styled.div`
@@ -24,6 +24,10 @@ export const Logo = styled.img`
   height: 2.2rem;
   margin-left: 1rem;
   margin-top: -0.8rem;
+  transition: transform 0.2s;
+  :hover {
+    transform: scale(1.13, 1.13);
+  }
 `;
 export const SettingsImg = styled.img`
   height: 2rem;
@@ -69,11 +73,6 @@ export const Slink = styled(Link)`
   margin-left: 1rem;
   text-decoration: none;
   color: white;
-  transition: transform 0.2s, margin-left 0.2s;
-  :hover {
-    transform: scale(1.13, 1.13);
-    margin-left: 1.5rem;
-  }
   @media ${device.laptop} {
     margin-left: 2rem;
   }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LogoImage from "../images/logo.png";
-import settingsImage from "../images/settings.png";
+import LogoImage from "../../images/logo.png";
+import settingsImage from "../../images/settings.png";
 import {
   AiOutlineClose,
   AiOutlineLogout,
@@ -9,8 +9,8 @@ import {
   AiOutlineHome,
 } from "react-icons/ai";
 import Cookies from "universal-cookie";
-import StudentImg from "../images/student.png";
-import TeacherImg from "../images/teacher-icon.png";
+import StudentImg from "../../images/student.png";
+import TeacherImg from "../../images/teacher-icon.png";
 import {
   Navbar,
   Title,
@@ -52,15 +52,25 @@ function Nav() {
           <div />
         </Decoration>
         <Container>
-          <Logo src={LogoImage} />
+          
           {isLogin ? (
+            <>
+            <Slink to="/home">
+            <Logo src={LogoImage} />
+            </Slink>
             <Slink to="/home">
               <Title>Study Time</Title>
             </Slink>
+            </>
           ) : (
+            <>
+            <Slink to="/">
+            <Logo src={LogoImage} />
+            </Slink>
             <Slink to="/">
               <Title>Study Time</Title>
             </Slink>
+            </>
           )}
         </Container>
         <Slink to="#">

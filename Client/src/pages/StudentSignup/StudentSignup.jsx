@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import {
   Main,
   SForm,
@@ -32,7 +32,7 @@ function StudentSignup() {
 
   const configuration = {
     method: "post",
-    url: "https://study-time.onrender.com/students/signup",
+    url: process.env.REACT_APP_SIGNUP_STUDENTS,
     data: {
       firstName: signupData.firstName,
       lastName: signupData.lastName,
