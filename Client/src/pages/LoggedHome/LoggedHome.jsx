@@ -16,7 +16,7 @@ import {
   SSelect,
   Slabel,
 } from "./LoggedHome.style";
-import { useFetchTeachers } from "../../components/ClientAPI";
+import { useFetchHome } from "../../hooks/useFetchHome.jsx";
 
 function LoggedHome() {
   const {
@@ -24,7 +24,7 @@ function LoggedHome() {
     subjectFilter,
     setSubjectFilter,
     filteredTeachers
-  } = useFetchTeachers();
+  } = useFetchHome();
 
   return (
     <>

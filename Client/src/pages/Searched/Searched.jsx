@@ -34,79 +34,35 @@ import {
   StarsWrapper,
   ReviewContent,
   ErrorText,
-  Sbutton
+  Sbutton,
 } from "./Searched.style";
-import { useFetchSearched } from "../../components/ClientAPI";
+import { useFetchSearched } from "../../hooks/useFetchSearched";
 
 function Searched() {
-  const { teacher, reviews, isLoading, fetchReviews, getSearched, fetchError } =
-    useFetchSearched();
+  const {
+    teacher,
+    reviews,
+    isLoading,
+    fetchReviews,
+    getSearched,
+    fetchError,
+    reviewForm,
+    setReviewForm,
+    handleSubmit,
+    isError
+  } = useFetchSearched();
 
   const [userID, setUserID] = useState("");
-  const [isError, setIsError] = useState("");
-  const [reviewForm, setReviewForm] = useState({
-    student: "",
-    teacher: "",
-    rating: "",
-    content: "",
-  });
+
   let params = useParams();
   const cookies = new Cookies();
   const user = cookies.get("USER");
-  const token = cookies.get("TOKEN");
-
-  const navigate = useNavigate();
 
   const getUserID = () => {
     const token = cookies.get("TOKEN");
     const decoded = jwt_decode(token);
     if (user === "student") {
       setUserID(decoded.studentId);
-    }
-  };
-
-  const configuration = {
-    method: "post",
-    url: `${process.env.REACT_APP_FETCH_REVIEWS}`,
-    data: {
-      student: reviewForm.student,
-      teacher: reviewForm.teacher,
-      content: reviewForm.content,
-      rating: reviewForm.rating,
-    },
-  };
-
-  const handleSubmit = async (e) => {
-    if (token) {
-      e.preventDefault();
-      if (user === "student") {
-        try {
-          if (Number(reviewForm.rating) <= 0) {
-            setIsError("Rating value has to be from 1 to 5");
-            throw new Error("Rating value has to be from 1 to 5");
-          } else if (Number(reviewForm.rating) > 5) {
-            setIsError("Rating value has to be from 1 to 5");
-            throw new Error("Rating value has to be from 1 to 5");
-          } else {
-            await axios(configuration).then((res) => {
-              console.log(res);
-            });
-            setIsError('')
-            setReviewForm({
-              content: "",
-              rating: "",
-            });
-            fetchReviews(params.search);
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      } else {
-        setIsError("Only students can post reviews");
-        throw new Error("Only students can post reviews");
-      }
-    } else {
-      navigate("/", { replace: true });
     }
   };
 
