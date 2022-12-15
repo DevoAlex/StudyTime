@@ -38,7 +38,7 @@ export const useFetchSearched = () => {
       setIsLoading(true);
       try {
         await axios
-          .get(`${process.env.REACT_APP_FETCH_TEACHERS}/${teacherID}`)
+          .get(`${process.env.REACT_APP_FETCH_SEARCHED}${teacherID}`)
           .then((res) => {
             setTeacher(res.data.data);
           });

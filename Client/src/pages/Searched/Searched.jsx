@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
 import { Helmet } from "react-helmet";
@@ -49,7 +49,7 @@ function Searched() {
     reviewForm,
     setReviewForm,
     handleSubmit,
-    isError
+    isError,
   } = useFetchSearched();
 
   const [userID, setUserID] = useState("");

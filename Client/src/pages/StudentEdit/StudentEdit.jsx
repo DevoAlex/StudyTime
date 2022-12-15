@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -22,7 +22,7 @@ function StudentUpdate() {
     isLoading,
     error,
     confirmPassword,
-    setConfirmPassword
+    setConfirmPassword,
   } = useEditStudents();
 
   return (

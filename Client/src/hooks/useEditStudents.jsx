@@ -114,9 +114,7 @@ export const useEditStudents = () => {
           });
       } catch (err) {
         console.log(err);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 250);
+        setIsLoading(false);
       }
       setTimeout(() => {
         setIsLoading(false);
@@ -131,19 +129,19 @@ export const useEditStudents = () => {
   }, []);
 
   useEffect(() => {
-    getUserData();
+    if (userID !== "") {
+      getUserData();
+    }
   }, [userID]);
 
   return {
     signupData,
     setSignupData,
-    editConfiguration,
     handleSubmit,
     handleDelete,
     isLoading,
-    setIsLoading,
     error,
     confirmPassword,
-    setConfirmPassword
+    setConfirmPassword,
   };
 };

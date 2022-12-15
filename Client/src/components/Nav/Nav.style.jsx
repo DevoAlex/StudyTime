@@ -73,6 +73,10 @@ export const Slink = styled(Link)`
   margin-left: 1rem;
   text-decoration: none;
   color: white;
+  transition: transform 0.2s;
+  :hover {
+    transform: scale(1.13, 1.13);
+  }
   @media ${device.laptop} {
     margin-left: 2rem;
   }
